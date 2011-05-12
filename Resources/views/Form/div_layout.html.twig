@@ -1,0 +1,14 @@
+{% block recaptcha_widget %}
+{% spaceless %}
+    <script type="text/javascript">
+        var RecaptchaOptions = {{ widget_options|default({})|json_encode|raw }};
+    </script>
+
+    <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k={{ public_key }}"></script>
+    <noscript>
+        <iframe src="http://www.google.com/recaptcha/api/noscript?k={{ public_key }}" height="300" width="500" frameborder="0"></iframe>
+        {{ form_widget(form.recaptcha_challenge_field) }}
+        {{ form_widget(form.recaptcha_response_field) }}
+    </noscript>
+{% endspaceless %}
+{% endblock %}
