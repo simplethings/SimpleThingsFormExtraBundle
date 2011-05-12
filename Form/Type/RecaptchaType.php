@@ -72,9 +72,7 @@ class RecaptchaType extends \Symfony\Component\Form\AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'csrf_protection' => false,
-            'required'        => false,
-            'error_bubbling'  => false,
+            'required'        => true,
             'property_path'   => false,
             'private_key'     => null,
             'public_key'      => null,

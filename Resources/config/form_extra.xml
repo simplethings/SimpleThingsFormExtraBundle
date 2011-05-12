@@ -10,7 +10,7 @@
     </parameters>
 
     <services>
-        <service id="comways_form_extra.type.recaptcha" class="%comways_form_extra.form.type.recaptcha.class%" scope="request">
+        <service id="comways_form_extra.form.type.recaptcha" class="%comways_form_extra.form.type.recaptcha.class%" scope="request">
             <tag name="form.type" alias="recaptcha"/>
             <argument type="service" id="request"/>
         </service>
