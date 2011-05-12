@@ -18,7 +18,5 @@
         <service id="comways_form_extra.form.extension.field" class="%comways_form_extra.form.extension.field.class%">
             <tag name="form.type_extension" alias="field" />
         </service>
-        
     </services>
-
 </container>
