@@ -6,13 +6,19 @@
 
     <parameters>
         <parameter key="comways_form_extra.form.type.recaptcha.class">Comways\FormExtraBundle\Form\Type\RecaptchaType</parameter>
+        <parameter key="comways_form_extra.form.extension.field.class">Comways\FormExtraBundle\Form\Extension\FieldTypeExtension</parameter>
     </parameters>
 
     <services>
-        <service id="form.type.recaptcha" class="%comways_form_extra.form.type.recaptcha.class%" scope="request">
+        <service id="comways_form_extra.type.recaptcha" class="%comways_form_extra.form.type.recaptcha.class%" scope="request">
             <tag name="form.type" alias="recaptcha"/>
             <argument type="service" id="request"/>
         </service>
+
+        <service id="comways_form_extra.form.extension.field" class="%comways_form_extra.form.extension.field.class%">
+            <tag name="form.type_extension" alias="field" />
+        </service>
+        
     </services>
 
 </container>
