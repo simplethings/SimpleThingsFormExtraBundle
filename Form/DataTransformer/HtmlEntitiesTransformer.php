@@ -2,7 +2,7 @@
 
 namespace Comways\FormExtraBundle\DataTransformer;
 
-use \htmlentities;
+use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Utilizes htmlentities to easy disallow all html inputs.
@@ -12,7 +12,7 @@ use \htmlentities;
  *
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class HtmlEntitiesTransformer implements \Symfony\Component\Form\DataTransformerInterface
+class HtmlEntitiesTransformer implements DataTransformerInterface
 {
 
     /**

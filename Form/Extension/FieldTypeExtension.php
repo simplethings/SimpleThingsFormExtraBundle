@@ -2,6 +2,7 @@
 
 namespace Comways\FormExtraBundle\Form\Extension;
 
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilder;
@@ -12,7 +13,7 @@ use Symfony\Component\Form\FormBuilder;
  *
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class FieldTypeExtension extends \Symfony\Component\Form\AbstractTypeExtension
+class FieldTypeExtension extends AbstractTypeExtension
 {
     /**
      * @return string

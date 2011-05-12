@@ -4,7 +4,6 @@ namespace Comways\FormExtraBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Comways\FormExtraBundle\DependencyInjection\Compiler\TwigFormPass;
 
 class ComwaysFormExtraBundle extends Bundle

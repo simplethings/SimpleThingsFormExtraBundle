@@ -3,13 +3,14 @@
 namespace Comways\FormExtraBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
  * Auto adds the Twig form template to the list of resources
  *
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class TwigFormPass implements \Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class TwigFormPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {

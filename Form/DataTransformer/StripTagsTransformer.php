@@ -2,7 +2,7 @@
 
 namespace Comways\FormExtraBundle\DataTransformer;
 
-use \strip_tags;
+use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Utilizes strip_tags to easy strip tags from fields.
@@ -12,7 +12,7 @@ use \strip_tags;
  *
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class StripTagsTransformer implements \Symfony\Component\Form\DataTransformerInterface
+class StripTagsTransformer implements DataTransformerInterface
 {
     /**
      * @var string

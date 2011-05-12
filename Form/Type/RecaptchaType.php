@@ -2,6 +2,7 @@
 
 namespace Comways\FormExtraBundle\Form\Type;
 
+use Symfony\Component\Form\AbstractType; 
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -25,7 +26,7 @@ use Comways\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
  *
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class RecaptchaType extends \Symfony\Component\Form\AbstractType
+class RecaptchaType extends AbstractType
 {
     /**
      * @var Request

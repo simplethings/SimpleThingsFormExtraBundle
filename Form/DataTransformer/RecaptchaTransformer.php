@@ -4,6 +4,7 @@ namespace Comways\FormExtraBundle\Form\DataTransformer;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\DataTransformer\TransformationFailedException;
+use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Transforms the request into the right fields for validating the
@@ -11,7 +12,7 @@ use Symfony\Component\Form\DataTransformer\TransformationFailedException;
  *
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class RecaptchaTransformer implements \Symfony\Component\Form\DataTransformerInterface
+class RecaptchaTransformer implements DataTransformerInterface
 {
     /**
      * @var Request
