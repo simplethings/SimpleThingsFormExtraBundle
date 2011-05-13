@@ -1,6 +1,6 @@
 <?php
 
-namespace Comways\FormExtraBundle\DataTransformer;
+namespace Comways\FormExtraBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -55,12 +55,22 @@ class HtmlEntitiesTransformer implements DataTransformerInterface
      */
     public function reverseTransform($value)
     {
-        $charset = 'ISO-8859-1';
+        return htmlentities($value, $this->flags, $this->guessCharset(), $this->doubleEncode);
+    }
 
+    /**
+     * Tries to guess the charset by using mb_* functions. If mbstring extension
+     * is not enabled it will always return ISO-8859-1
+     *
+     * @param string $value
+     * @return string
+     */
+    protected function guessCharset($value)
+    {
         if (function_exists('mb_detect_encoding')) {
-            $charset = mb_detect_encoding($value, mb_detect_order(), true);
+            return mb_detect_encoding($value, mb_detect_order(), true);
         }
 
-        return htmlentities($value, $this->flags, $charset, $this->doubleEncode);
+        return 'ISO-8859-1';
     }
 }
