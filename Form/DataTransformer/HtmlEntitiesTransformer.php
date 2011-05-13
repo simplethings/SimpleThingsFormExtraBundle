@@ -55,7 +55,7 @@ class HtmlEntitiesTransformer implements DataTransformerInterface
      */
     public function reverseTransform($value)
     {
-        return htmlentities($value, $this->flags, $this->guessCharset(), $this->doubleEncode);
+        return htmlentities($value, $this->flags, $this->guessCharset($value), $this->doubleEncode);
     }
 
     /**
@@ -68,7 +68,10 @@ class HtmlEntitiesTransformer implements DataTransformerInterface
     protected function guessCharset($value)
     {
         if (function_exists('mb_detect_encoding')) {
-            return mb_detect_encoding($value, mb_detect_order(), true);
+            $charset = mb_detect_encoding($value, mb_detect_order(), true);
+            if ($charset != 'ASCII') {
+                return $charset;
+            }
         }
 
         return 'ISO-8859-1';
