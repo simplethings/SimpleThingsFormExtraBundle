@@ -1,6 +1,6 @@
 <?php
 
-namespace Comways\FormExtraBundle\DataTransformer;
+namespace Comways\FormExtraBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
