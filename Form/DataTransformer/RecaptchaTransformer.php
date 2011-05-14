@@ -59,4 +59,3 @@ class RecaptchaTransformer implements DataTransformerInterface
         throw new TransformationFailedException('The entered Recaptcha code is invalid');
     }
 }
-

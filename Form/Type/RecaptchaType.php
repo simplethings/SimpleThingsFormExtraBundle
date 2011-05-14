@@ -30,16 +30,23 @@ use Comways\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
 class RecaptchaType extends AbstractType
 {
     /**
-     * @var Request
+     * @var Recaptcha
      */
-    protected $request;
+    protected $recaptcha;
 
     /**
-     * @param Request $request
+     * @var string
      */
-    public function __construct(Request $request)
+    protected $publicKey;
+
+    /**
+     * @param Recaptcha $recaptcha
+     * @param string $publicKey
+     */
+    public function __construct(Recaptcha $recaptcha, $publicKey)
     {
-        $this->request = $request;
+        $this->recaptcha = $recaptcha;
+        $this->publicKey = $publicKey;
     }
 
     /**
@@ -57,13 +64,23 @@ class RecaptchaType extends AbstractType
             ))
         ;
 
-        $recaptcha = new Recaptcha($this->request, $options['private_key']);
-        $builder->prependClientTransformer(new RecaptchaTransformer($recaptcha));
+        $builder->prependClientTransformer(new RecaptchaTransformer($this->recaptcha));
 
         $builder
-            ->setAttribute('public_key', $options['public_key'])
             ->setAttribute('widget_options', $options['widget_options'])
         ;
+    }
+
+    /**
+     * Sets attributes for use with the renderer
+     *
+     * @param FormView $view
+     * @param FormInterface $form
+     */
+    public function buildView(FormView $view, FormInterface $form)
+    {
+        $view->set('public_key', $this->publicKey);
+        $view->set('widget_options', $form->getAttribute('widget_options'));
     }
 
     /**
@@ -77,22 +94,8 @@ class RecaptchaType extends AbstractType
         return array(
             'required'        => true,
             'property_path'   => false,
-            'private_key'     => null,
-            'public_key'      => null,
             'widget_options'  => array(),
         );
-    }
-
-    /**
-     * Sets attributes for use with the renderer
-     *
-     * @param FormView $view
-     * @param FormInterface $form
-     */
-    public function buildView(FormView $view, FormInterface $form)
-    {
-        $view->set('public_key', $form->getAttribute('public_key'));
-        $view->set('widget_options', $form->getAttribute('widget_options'));
     }
 
     /**

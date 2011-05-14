@@ -6,12 +6,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormView;
 use Comways\FormExtraBundle\Form\Type\RecaptchaType;
+use Comways\FormExtraBundle\Service\Recaptcha;
 
 class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->type = new RecaptchaType(new Request());
+        $this->type = new RecaptchaType(
+            new Recaptcha(
+                new Request(),
+                'privateKey'
+            ),
+            'publicKey'
+        )
+        ;
         $this->dispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
         $this->factory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $this->builder = new FormBuilder('name', $this->factory, $this->dispatcher);
@@ -27,8 +35,6 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(array(
             'property_path' => false,
-            'private_key' => null,
-            'public_key' => null,
             'required' => true,
             'widget_options' => array(),
         ), $this->type->getDefaultOptions(array()));
@@ -37,14 +43,11 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
     public function testBuildForm()
     {
         $this->type->buildForm($this->builder, array(
-            'private_key' => 'my_private_key',
-            'public_key' => 'my_public_key',
             'widget_options' => array(
                 'theme' => 'white'
             ),
         ));
 
-        $this->assertEquals('my_public_key', $this->builder->getAttribute('public_key'));
         $this->assertEquals(array(
             'theme' => 'white',
         ), $this->builder->getAttribute('widget_options'));
@@ -64,11 +67,10 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
         $this->builder->setAttribute('widget_options', array(
             'theme' => 'white',
         ));
-        $this->builder->setAttribute('public_key', 'my_public_key');
 
         $this->type->buildView($view, $this->builder->getForm());
 
-        $this->assertEquals('my_public_key', $view->get('public_key'));
+        $this->assertEquals('publicKey', $view->get('public_key'));
         $this->assertEquals(array(
             'theme' => 'white',
         ), $view->get('widget_options'));

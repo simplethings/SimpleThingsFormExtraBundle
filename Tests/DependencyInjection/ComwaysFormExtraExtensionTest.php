@@ -16,6 +16,7 @@ class ComwaysFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
         $parameters = array(
             'form.type.recaptcha.class' => 'Comways\FormExtraBundle\Form\Type\RecaptchaType',
             'form.extension.field.class' => 'Comways\FormExtraBundle\Form\Extension\FieldTypeExtension',
+            'service.recaptcha.class' => 'Comways\FormExtraBundle\Service\Recaptcha',
         );
 
         foreach ($parameters as $parameter => $value) {
@@ -25,6 +26,7 @@ class ComwaysFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
         $definitions = array(
             'form.type.recaptcha',
             'form.extension.field',
+            'service.recaptcha',
         );
 
         foreach ($definitions as $definition) {

@@ -60,7 +60,7 @@ class Recaptcha
 
         $result = file_get_contents('http://www.google.com/recaptcha/api/verify', false, $context);
 
-        if (false !== strpos('true', $result, 0)) {
+        if (false !== strpos($result, 'true', 0)) {
             return true;
         }
 

@@ -7,12 +7,18 @@
     <parameters>
         <parameter key="comways_form_extra.form.type.recaptcha.class">Comways\FormExtraBundle\Form\Type\RecaptchaType</parameter>
         <parameter key="comways_form_extra.form.extension.field.class">Comways\FormExtraBundle\Form\Extension\FieldTypeExtension</parameter>
+        <parameter key="comways_form_extra.service.recaptcha.class">Comways\FormExtraBundle\Service\Recaptcha</parameter>
     </parameters>
 
     <services>
+        <service id="comways_form_extra.service.recaptcha" class="%comways_form_extra.service.recaptcha.class%" scope="request">
+            <argument type="service" id="request" />
+            <argument>privateKey</argument>
+        </service>
+
         <service id="comways_form_extra.form.type.recaptcha" class="%comways_form_extra.form.type.recaptcha.class%" scope="request">
             <tag name="form.type" alias="recaptcha" />
-            <argument type="service" id="request" />
+            <argument type="service" id="comways_form_extra.service.recaptcha" />
         </service>
 
         <service id="comways_form_extra.form.extension.field" class="%comways_form_extra.form.extension.field.class%">
