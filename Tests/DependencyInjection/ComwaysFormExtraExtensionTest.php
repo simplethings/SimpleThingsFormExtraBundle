@@ -22,8 +22,6 @@ class ComwaysFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($container->getParameter('comways_form_extra.' . $parameter), $value);
         }
 
-        $this->assertEquals(2, count($container->getParameterBag()->all()));
-
         $definitions = array(
             'form.type.recaptcha',
             'form.extension.field',

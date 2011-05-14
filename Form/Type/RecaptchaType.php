@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 
+use Comways\FormExtraBundle\Service\Recaptcha;
 use Comways\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
 
 /**
@@ -56,7 +57,8 @@ class RecaptchaType extends AbstractType
             ))
         ;
 
-        $builder->prependClientTransformer(new RecaptchaTransformer($this->request, $options['private_key']));
+        $recaptcha = new Recaptcha($this->request, $options['private_key']);
+        $builder->prependClientTransformer(new RecaptchaTransformer($recaptcha));
 
         $builder
             ->setAttribute('public_key', $options['public_key'])

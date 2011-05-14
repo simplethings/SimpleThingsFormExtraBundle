@@ -11,8 +11,8 @@
 
     <services>
         <service id="comways_form_extra.form.type.recaptcha" class="%comways_form_extra.form.type.recaptcha.class%" scope="request">
-            <tag name="form.type" alias="recaptcha"/>
-            <argument type="service" id="request"/>
+            <tag name="form.type" alias="recaptcha" />
+            <argument type="service" id="request" />
         </service>
 
         <service id="comways_form_extra.form.extension.field" class="%comways_form_extra.form.extension.field.class%">

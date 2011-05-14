@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\DataTransformer\TransformationFailedException;
 use Symfony\Component\Form\DataTransformerInterface;
 
+use Comways\FormExtraBundle\Service\Recaptcha;
+
 /**
  * Transforms the request into the right fields for validating the
  * recaptcha field.
@@ -14,24 +16,14 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class RecaptchaTransformer implements DataTransformerInterface
 {
-    /**
-     * @var Request
-     */
-    protected $request;
+    protected $recaptcha;
 
     /**
-     * @var string
+     * @param Recaptcha $recaptcha
      */
-    protected $privateKey;
-
-    /**
-     * @param Request $request
-     * @param string  $privateKey
-     */
-    public function __construct(Request $request, $privateKey)
+    public function __construct(Recaptcha $recaptcha)
     {
-        $this->request    = $request;
-        $this->privateKey = $privateKey;
+        $this->recaptcha = $recaptcha;
     }
 
     /**
@@ -49,29 +41,15 @@ class RecaptchaTransformer implements DataTransformerInterface
      * @param  array $array
      * @return array
      */
-    public function reverseTransform($array)
+    public function reverseTransform($data)
     {
-        $request = $this->request->request;
-        $params  = array(
-            'remoteip'   => $this->request->server->get('REMOVE_ADDR', '127.0.0.1'),
-            'privatekey' => $this->privateKey,
-            'challenge'  => $request->get('recaptcha_challenge_field', $array['recaptcha_challenge_field']), 
-            'response'   => $request->get('recaptcha_response_field', $array['recaptcha_response_field']),
-        );
+        $data = array_replace(array(
+            'recaptcha_challenge_field' => null,
+            'recaptcha_response_field'  => null,
+        ), $array);
 
-        $context = stream_context_create(array(
-            'http' => array(
-                'method'  => 'POST',
-                'content' => http_build_query($params),
-                'header'  => array(
-                    'Content-Type: application/x-www-form-urlencoded',
-                ),
-            ),
-        ));
 
-        $result = file_get_contents('http://www.google.com/recaptcha/api/verify', false, $context);
-
-        if (false !== strpos($result, 'true', 0)) {
+        if ($this->recaptcha->isValid($array['recaptcha_challenge_field'], $array['recaptcha_response_field'])) {
             return array(
                 'recaptcha_response_field'  => 'manual_challenge',
                 'recaptcha_challenge_field' => '',
