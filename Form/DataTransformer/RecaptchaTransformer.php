@@ -38,7 +38,7 @@ class RecaptchaTransformer implements DataTransformerInterface
     /**
      * Transforms the value from the request and validates the fields according to the api
      *
-     * @param  array $array
+     * @param  array $data
      * @return array
      */
     public function reverseTransform($data)
@@ -46,10 +46,10 @@ class RecaptchaTransformer implements DataTransformerInterface
         $data = array_replace(array(
             'recaptcha_challenge_field' => null,
             'recaptcha_response_field'  => null,
-        ), $array);
+        ), $data);
 
 
-        if ($this->recaptcha->isValid($array['recaptcha_challenge_field'], $array['recaptcha_response_field'])) {
+        if ($this->recaptcha->isValid($data['recaptcha_challenge_field'], $data['recaptcha_response_field'])) {
             return array(
                 'recaptcha_response_field'  => 'manual_challenge',
                 'recaptcha_challenge_field' => '',
