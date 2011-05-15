@@ -3,7 +3,7 @@
 namespace Comways\FormExtraBundle\Form\DataTransformer;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\DataTransformer\TransformationFailedException;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\DataTransformerInterface;
 
 use Comways\FormExtraBundle\Service\Recaptcha;

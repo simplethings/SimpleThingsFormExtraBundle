@@ -18,8 +18,8 @@ class ComwaysFormExtraExtension extends Extension
         $processor = new Processor();
         $config = $processor->processConfiguration(new Configuration(), $configs);
 
-        $container->getDefinition('comways_form_extra.service.recaptcha')->replaceArgument(1, $config['private_key']);
-        $contianer->getDefinition('comways_form_extra.form.type.recaptcha')->replaceArgument(1, $config['public_key']);
+        $container->getDefinition('comways_form_extra.service.recaptcha')->replaceArgument(1, $config['recaptcha']['private_key']);
+        $container->getDefinition('comways_form_extra.form.type.recaptcha')->replaceArgument(1, $config['recaptcha']['public_key']);
     }
 }
 

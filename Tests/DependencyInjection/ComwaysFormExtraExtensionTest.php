@@ -11,7 +11,12 @@ class ComwaysFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $container = new ContainerBuilder();
         $extension = new ComwaysFormExtraExtension();
-        $extension->load(array(), $container);
+        $extension->load(array(array(
+            'recaptcha' => array(
+                'private_key' => 'my_private_key',
+                'public_key' => 'my_public_key',
+            ),
+        )), $container);
 
         $parameters = array(
             'form.type.recaptcha.class' => 'Comways\FormExtraBundle\Form\Type\RecaptchaType',
