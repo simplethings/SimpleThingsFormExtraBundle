@@ -60,11 +60,16 @@ Usage
 ``` php
 <?php
 // ...
-$builder->add('recaptcha', 'recaptcha', array(
-    'private_key' => 'private_key_here_required',
-    'public_key' => 'public_key_here_required',
-));
+$builder->add('recaptcha', 'recaptcha');
 // ...
+```
+
+``` yaml
+# app/config/config.yml
+comways_form_extra:
+    recaptcha:
+        private_key: "your-private-key"
+        public_key:  "your-public-key"
 ```
 
 ### FieldTypeExtension
@@ -82,5 +87,30 @@ $builder->add('body', 'textarea', array(
         'class' => 'niceditor',
     )
 ));
+// ...
+```
+
+### HtmlEntitiesTransformer
+
+Converts html code into entites. Also extends `htmlentities` function to auto guess the used charset
+if `mbstring` extension is availible.
+
+``` php
+<?php
+// ...
+$builder->get('body')->prependNormTransformer(new HtmlEntitiesTransformer(ENT_COMPAT, true));
+// ...
+```
+
+### StripTagsTransformer
+
+Provides easy tag stripping capabilities for your forms to reduce xss attacks. You note it is not the
+best solution.
+
+``` php
+<?php
+// ...
+// This will allow <p> tags.
+$builder->get('body')->prependNormTransformer(new StripTagsTransformer('<p>'));
 // ...
 ```
