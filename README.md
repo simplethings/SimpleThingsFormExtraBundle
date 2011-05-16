@@ -72,6 +72,16 @@ comways_form_extra:
         public_key:  "your-public-key"
 ```
 
+When doing functional testing it is not possible to use the real Google Recaptcha API therefor there is
+a `Comways\FormExtraBundle\FunctionalTest\Recaptcha` which always returns true.
+
+It can be used by overwriting the DependencyInjection parameter in app/config/config_test.yml
+
+``` yaml
+parameters:
+    comways_form_extra.service.recaptcha.class: Comways\FormExtraBundle\FunctionalTest\Recaptcha
+```
+
 ### FieldTypeExtension
 
 A Field Extension contains method called by FormBuilder or createView. Theese applies to all fields
