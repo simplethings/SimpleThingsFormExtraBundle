@@ -79,7 +79,7 @@ It can be used by overwriting the DependencyInjection parameter in app/config/co
 
 ``` yaml
 parameters:
-    comways_form_extra.service.recaptcha.class: Comways\FormExtraBundle\FunctionalTest\Recaptcha
+    comways_form_extra.service.recaptcha.class: Comways\FormExtraBundle\FunctionalTest\AlwaysValidRecaptcha
 ```
 
 ### FieldTypeExtension

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class Recaptcha
+class Recaptcha implements RecaptchaInterface
 {
     /**
      * @var Request $request

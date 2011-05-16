@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 
-use Comways\FormExtraBundle\Service\Recaptcha;
+use Comways\FormExtraBundle\Service\RecaptchaInterface;
 use Comways\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
 
 /**
@@ -43,7 +43,7 @@ class RecaptchaType extends AbstractType
      * @param Recaptcha $recaptcha
      * @param string $publicKey
      */
-    public function __construct(Recaptcha $recaptcha, $publicKey)
+    public function __construct(RecaptchaInterface $recaptcha, $publicKey)
     {
         $this->recaptcha = $recaptcha;
         $this->publicKey = $publicKey;
