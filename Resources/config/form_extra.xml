@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="comways_form_extra.form.type.recaptcha.class">Comways\FormExtraBundle\Form\Type\RecaptchaType</parameter>
         <parameter key="comways_form_extra.form.extension.field.class">Comways\FormExtraBundle\Form\Extension\FieldTypeExtension</parameter>
+        <parameter key="comways_form_extra.form.extension.honeypot.class">Comways\FormExtraBundle\Form\Extension\HoneypotFormTypeExtension</parameter>
         <parameter key="comways_form_extra.service.recaptcha.class">Comways\FormExtraBundle\Service\Recaptcha</parameter>
     </parameters>
 
@@ -24,6 +25,10 @@
 
         <service id="comways_form_extra.form.extension.field" class="%comways_form_extra.form.extension.field.class%">
             <tag name="form.type_extension" alias="field" />
+        </service>
+
+        <service id="comways_form_extra.form.extension.honeypot" class="%comways_form_extra.form.extension.honeypot.class%">
+            <tag name="form.type_extension" alias="form" />
         </service>
     </services>
 </container>

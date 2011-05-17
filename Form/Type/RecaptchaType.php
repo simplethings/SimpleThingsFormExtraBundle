@@ -84,6 +84,18 @@ class RecaptchaType extends AbstractType
     }
 
     /**
+     * @param array $options
+     * @return array
+     */
+    public function getAllowedOptionValues(array $options)
+    {
+        return array(
+            'required' => 'boolean',
+            'widget_options' => 'array',
+        );
+    }
+
+    /**
      * Options for this type
      *
      * @param  array $options
