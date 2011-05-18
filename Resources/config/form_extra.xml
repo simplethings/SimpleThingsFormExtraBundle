@@ -23,7 +23,7 @@
             <argument />
         </service>
         
-        <service id="comways_form_extra.form.type.image" class="%comways_form_extra.form.type.image.class%" scope="request">
+        <service id="comways_form_extra.form.type.image" class="%comways_form_extra.form.type.image.class%">
             <tag name="form.type" alias="image" />
         </service>
 
