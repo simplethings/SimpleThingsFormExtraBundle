@@ -82,6 +82,57 @@ parameters:
     comways_form_extra.service.recaptcha.class: Comways\FormExtraBundle\FunctionalTest\Recaptcha
 ```
 
+## FileSetType
+
+`FileSetType` allows you to incrementally add more files to a collection of files by extending
+the `FileType`. It render an unordered list of all the previously uploaded base filenames.
+
+Instead of return the previously added file you return an array of all file names
+from the fields getter method and in the setter method you append the newly uploaded file to the collection:
+
+``` php
+<?php
+class Document
+{
+    // temporary field, used in the form, to move new attachments to persistence
+    private $newAttachment;
+    // persistent array with all attachments.
+    private $attachments;
+
+    public function getNewAttachment()
+    {
+        $files = array();
+        foreach ($this->attachments AS $attachment) {
+            $files[] = $attachment->getFilename();
+        }
+        return $files;
+    }
+
+    public function setNewAttachment(File $newAttachment = null)
+    {
+        $this->newAttachment = $newAttachment;
+    }
+
+    public function moveNewAttachment()
+    {
+        // code to move file and include in the attachments field.
+    }
+}
+```
+
+Using the builder to create a field for this type would then look like:
+
+``` php
+$builder->add('newAttachment', 'fileset', array(
+    'type' => 'file',
+));
+```
+
+There are optional parameters 'delete_route' and 'delete_id' which are then used with twigs path
+method to generate a route with parameters "id" and "file", to delete the listed file. If the information
+passed is not enough you should overwrite the twig template with your own logic to implement
+deleting.
+
 ### FieldTypeExtension
 
 A Field Extension contains method called by FormBuilder or createView. Theese applies to all fields

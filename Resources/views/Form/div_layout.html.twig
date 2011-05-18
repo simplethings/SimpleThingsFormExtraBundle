@@ -31,3 +31,25 @@
     </div>
 {% endspaceless %}
 {% endblock %}
+
+{% block fileset_widget %}
+    <ul>
+    {% for file in files %}
+        {% spaceless %}
+        <li>
+            {{ file }}
+            {% if delete_route is not empty and delete_id is not empty %}
+                <a href="{{ path(delete_route, {"id": delete_id, "file": file}) }}">[{% trans %}Delete{% endtrans %}]</a>
+            {% endif %}
+        </li>
+        {% endspaceless %}
+    {% endfor %}
+    </ul>
+
+    <div {{ block('container_attributes') }}>
+        {{ form_widget(form.file) }}
+        {{ form_widget(form.token) }}
+        {{ form_widget(form.name) }}
+        {{ form_widget(form.originalName) }}
+    </div>
+{% endblock %}
