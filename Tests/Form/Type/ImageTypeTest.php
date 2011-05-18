@@ -27,9 +27,9 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
     public function testDefaultOptions()
     {
         $this->assertEquals(array(
-            'base_path' => false,
-            'base_uri' => false,
-            'no_image_placeholder_uri' => '',
+            'base_path'                 => false,
+            'base_uri'                  => false,
+            'no_image_placeholder_uri'  => '',
             'image_alt'                 => '',
             'image_width'               => false,
             'image_height'              => false,
@@ -37,11 +37,11 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
     }
     
     public function testBuildForm()
-    {       
+    {
         $options = array(
-            'base_path' => '/tmp',
-            'base_uri' => 'http://example.com',
-            'no_image_placeholder_uri' => '',
+            'base_path'                 => '/tmp',
+            'base_uri'                  => 'http://example.com',
+            'no_image_placeholder_uri'  => '',
             'image_alt'                 => '',
             'image_width'               => false,
             'image_height'              => false,
@@ -62,9 +62,9 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
         $view = new FormView();
 
         $options = array(
-            'base_path' => __DIR__,
-            'base_uri' => 'http://example.com',
-            'no_image_placeholder_uri' => '',
+            'base_path'                 => __DIR__,
+            'base_uri'                  => 'http://example.com',
+            'no_image_placeholder_uri'  => '',
             'image_alt'                 => '',
             'image_width'               => false,
             'image_height'              => false,
