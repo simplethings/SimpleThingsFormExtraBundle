@@ -81,10 +81,16 @@ class ImageType extends AbstractType
             'image_alt'                 => '',
             'image_width'               => false,
             'image_height'              => false,
+            'type'                      => 'file',
         );
     }
     
-
+    /**
+     * Inherits from file type and adds displaying capabilities.
+     * 
+     * @param array $options
+     * @return string 
+     */
     public function getParent(array $options)
     {
         return 'file';

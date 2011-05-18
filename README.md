@@ -57,6 +57,8 @@ Usage
 
 ### RecaptchaFieldType
 
+Adds [Google Recaptcha](http://www.google.com/recaptcha) capabilities to your form.
+
 ``` php
 <?php
 // ...
@@ -81,6 +83,22 @@ It can be used by overwriting the DependencyInjection parameter in app/config/co
 parameters:
     comways_form_extra.service.recaptcha.class: Comways\FormExtraBundle\FunctionalTest\Recaptcha
 ```
+
+### ImageType
+
+This is an extension to the default `FileType`. It adds functionality to display the previously
+uploaded image right beside the file upload input widget:
+
+``` php
+     $builder->add('myimage', 'image', array(
+         'base_path' => '/var/www/images/',
+         'base_uri' => 'http://example.com/images/',
+         'no_image_placeholder_uri' => 'http://example.com/images/noimage.jpg',
+    ));
+```
+
+It replaces the base path of the File instance with a base uri and displays that in an img
+tag. You can additionally pass 'image_alt', 'image_width' or 'image_height' options to the builder.
 
 ### FieldTypeExtension
 
