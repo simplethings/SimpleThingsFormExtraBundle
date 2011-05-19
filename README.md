@@ -85,9 +85,9 @@ parameters:
 ## FileSetType
 
 `FileSetType` allows you to incrementally add more files to a collection of files by extending
-the `FileType`. It render an unordered list of all the previously uploaded base filenames.
+the `FileType`. It renders an unordered list of all the previously uploaded base filenames.
 
-Instead of return the previously added file you return an array of all file names
+Instead of returning the previously added file you return an array of all file names
 from the fields getter method and in the setter method you append the newly uploaded file to the collection:
 
 ``` php
@@ -123,6 +123,7 @@ class Document
 Using the builder to create a field for this type would then look like:
 
 ``` php
+<?php
 $builder->add('newAttachment', 'fileset', array(
     'type' => 'file',
 ));

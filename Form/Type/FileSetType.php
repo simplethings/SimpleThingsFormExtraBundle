@@ -34,13 +34,13 @@ class FileSetType extends AbstractType
         }
         
         $files = array();
-        foreach ($data AS $file) {
+        foreach ($data as $file) {
             if ($file instanceof File) {
                 $files[] = basename($file->getPath());
             } else if (is_string($file)) {
                 $files[] = basename($file);
             } else {
-                throw new \RuntimeException("Expecting an instance of File or string.");
+                throw new UnexpectedTypeException($file, 'string');
             }
         }
         $view->set('files', $files);
