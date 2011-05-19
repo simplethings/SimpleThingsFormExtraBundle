@@ -6,12 +6,13 @@ This bundle contains additional functionality for Symfony2's Form Component.
 Currently this Bundle provides the following:
 
 * RecaptchaFieldType for using Google's reCAPTCHA service.
+* ImageType for showing the previously uploaded image
+* FileSet for showing a list of previously uplaoded files
 * FieldTypeExtension for allowing setting `attr` when building a Form.
 
 Current this Bundle **does not** provide the following:
 
 * In depth documentation.
-* Tests
 * Unicorns or other fairytale creatures.
 
 Contributors
