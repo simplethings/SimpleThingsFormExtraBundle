@@ -83,6 +83,19 @@ parameters:
     comways_form_extra.service.recaptcha.class: Comways\FormExtraBundle\FunctionalTest\Recaptcha
 ```
 
+## PlainType
+
+Sometimes it is needed to show the value of a field without having it be an input box. This is where
+PlainType comes in handy. It will render a simple p tags with the fields value and also prevent that
+field from being bound if the form is tampered with.
+
+``` php
+<?php
+// ...
+$builder->add('username', 'plain');
+// ...
+```
+
 ## FileSetType
 
 `FileSetType` allows you to incrementally add more files to a collection of files by extending
