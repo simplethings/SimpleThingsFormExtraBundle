@@ -53,3 +53,9 @@
         {{ form_widget(form.originalName) }}
     </div>
 {% endblock %}
+
+{% block plain_widget %}
+    <div {{ block('container_attributes') }}>
+        <p {{ block('attributes') }}>{{ value|escape }}</p>
+    </div>
+{% endblock %}
