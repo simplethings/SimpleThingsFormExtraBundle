@@ -7,7 +7,8 @@
     <parameters>
         <parameter key="comways_form_extra.form.type.recaptcha.class">Comways\FormExtraBundle\Form\Type\RecaptchaType</parameter>
         <parameter key="comways_form_extra.form.type.image.class">Comways\FormExtraBundle\Form\Type\ImageType</parameter>
-        <parameter key="comways_form_extra.form.type.fileset.class">Comways\FormExtraBundle\Form\Type\FileSetType</parameter>
+        <parameter key="comways_form_extra.form.type.plain.class">Comways\FormExtraBundle\Form\Type\PlainType</parameter>
+        <parameter key="comways_form_extra.form.type.file_set.class">Comways\FormExtraBundle\Form\Type\FileSetType</parameter>
         <parameter key="comways_form_extra.form.extension.field.class">Comways\FormExtraBundle\Form\Extension\FieldTypeExtension</parameter>
         <parameter key="comways_form_extra.service.recaptcha.class">Comways\FormExtraBundle\Service\Recaptcha</parameter>
     </parameters>
@@ -23,13 +24,17 @@
             <argument type="service" id="comways_form_extra.service.recaptcha" />
             <argument />
         </service>
+
+        <service id="comways_form_extra.form.type.plain" class="%comways_form_extra.form.type.plain.class%">
+            <tag name="form.type" alias="plain" />
+        </service>
         
         <service id="comways_form_extra.form.type.image" class="%comways_form_extra.form.type.image.class%">
             <tag name="form.type" alias="image" />
         </service>
         
-        <service id="comways_form_extra.form.type.fileset" class="%comways_form_extra.form.type.fileset.class%" scope="request">
-            <tag name="form.type" alias="fileset" />
+        <service id="comways_form_extra.form.type.file_set" class="%comways_form_extra.form.type.file_set.class%" scope="request">
+            <tag name="form.type" alias="file_set" />
         </service>
 
         <service id="comways_form_extra.form.extension.field" class="%comways_form_extra.form.extension.field.class%">

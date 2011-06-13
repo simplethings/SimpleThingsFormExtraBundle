@@ -19,9 +19,12 @@ class ComwaysFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
         )), $container);
 
         $parameters = array(
-            'form.type.recaptcha.class' => 'Comways\FormExtraBundle\Form\Type\RecaptchaType',
+            'form.type.recaptcha.class'  => 'Comways\FormExtraBundle\Form\Type\RecaptchaType',
+            'form.type.image.class'      => 'Comways\FormExtraBundle\Form\Type\ImageType',
+            'form.type.file_set.class'   => 'Comways\FormExtraBundle\Form\Type\FileSetType',
+            'form.type.plain.class'      => 'Comways\FormExtraBundle\Form\Type\PlainType',
             'form.extension.field.class' => 'Comways\FormExtraBundle\Form\Extension\FieldTypeExtension',
-            'service.recaptcha.class' => 'Comways\FormExtraBundle\Service\Recaptcha',
+            'service.recaptcha.class'    => 'Comways\FormExtraBundle\Service\Recaptcha',
         );
 
         foreach ($parameters as $parameter => $value) {
@@ -30,6 +33,9 @@ class ComwaysFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
 
         $definitions = array(
             'form.type.recaptcha',
+            'form.type.image',
+            'form.type.file_set',
+            'form.type.plain',
             'form.extension.field',
             'service.recaptcha',
         );

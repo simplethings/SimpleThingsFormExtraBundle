@@ -33,6 +33,7 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
             'image_alt'                 => '',
             'image_width'               => false,
             'image_height'              => false,
+            'type'                      => 'file',
         ), $this->type->getDefaultOptions(array()));
     }
     
