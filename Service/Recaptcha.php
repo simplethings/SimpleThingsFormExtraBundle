@@ -1,6 +1,6 @@
 <?php
 
-namespace Comways\FormExtraBundle\Service;
+namespace SimpleThings\FormExtraBundle\Service;
 
 use Symfony\Component\HttpFoundation\Request;
 

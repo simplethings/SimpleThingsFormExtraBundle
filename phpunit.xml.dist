@@ -7,7 +7,7 @@
     </php>
 -->
     <testsuites>
-        <testsuite name="ComwaysFormExtraBundle">
+        <testsuite name="SimpleThingsFormExtraBundle">
             <directory suffix="Test.php">./Tests</directory>
         </testsuite>
     </testsuites>

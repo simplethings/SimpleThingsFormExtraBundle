@@ -1,12 +1,12 @@
 <?php
 
-namespace Comways\FormExtraBundle\Form\DataTransformer;
+namespace SimpleThings\FormExtraBundle\Form\DataTransformer;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\DataTransformerInterface;
 
-use Comways\FormExtraBundle\Service\Recaptcha;
+use SimpleThings\FormExtraBundle\Service\Recaptcha;
 
 /**
  * Transforms the request into the right fields for validating the

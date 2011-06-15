@@ -1,6 +1,6 @@
 <?php
 
-namespace Comways\FormExtraBundle\Form\Extension;
+namespace SimpleThings\FormExtraBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;

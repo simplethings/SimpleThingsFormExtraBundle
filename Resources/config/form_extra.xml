@@ -5,39 +5,39 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="comways_form_extra.form.type.recaptcha.class">Comways\FormExtraBundle\Form\Type\RecaptchaType</parameter>
-        <parameter key="comways_form_extra.form.type.image.class">Comways\FormExtraBundle\Form\Type\ImageType</parameter>
-        <parameter key="comways_form_extra.form.type.plain.class">Comways\FormExtraBundle\Form\Type\PlainType</parameter>
-        <parameter key="comways_form_extra.form.type.file_set.class">Comways\FormExtraBundle\Form\Type\FileSetType</parameter>
-        <parameter key="comways_form_extra.form.extension.field.class">Comways\FormExtraBundle\Form\Extension\FieldTypeExtension</parameter>
-        <parameter key="comways_form_extra.service.recaptcha.class">Comways\FormExtraBundle\Service\Recaptcha</parameter>
+        <parameter key="simple_things_form_extra.form.type.recaptcha.class">SimpleThings\FormExtraBundle\Form\Type\RecaptchaType</parameter>
+        <parameter key="simple_things_form_extra.form.type.image.class">SimpleThings\FormExtraBundle\Form\Type\ImageType</parameter>
+        <parameter key="simple_things_form_extra.form.type.plain.class">SimpleThings\FormExtraBundle\Form\Type\PlainType</parameter>
+        <parameter key="simple_things_form_extra.form.type.file_set.class">SimpleThings\FormExtraBundle\Form\Type\FileSetType</parameter>
+        <parameter key="simple_things_form_extra.form.extension.field.class">SimpleThings\FormExtraBundle\Form\Extension\FieldTypeExtension</parameter>
+        <parameter key="simple_things_form_extra.service.recaptcha.class">SimpleThings\FormExtraBundle\Service\Recaptcha</parameter>
     </parameters>
 
     <services>
-        <service id="comways_form_extra.service.recaptcha" class="%comways_form_extra.service.recaptcha.class%" scope="request">
+        <service id="simple_things_form_extra.service.recaptcha" class="%simple_things_form_extra.service.recaptcha.class%" scope="request">
             <argument type="service" id="request" />
             <argument />
         </service>
 
-        <service id="comways_form_extra.form.type.recaptcha" class="%comways_form_extra.form.type.recaptcha.class%" scope="request">
+        <service id="simple_things_form_extra.form.type.recaptcha" class="%simple_things_form_extra.form.type.recaptcha.class%" scope="request">
             <tag name="form.type" alias="recaptcha" />
-            <argument type="service" id="comways_form_extra.service.recaptcha" />
+            <argument type="service" id="simple_things_form_extra.service.recaptcha" />
             <argument />
         </service>
 
-        <service id="comways_form_extra.form.type.plain" class="%comways_form_extra.form.type.plain.class%">
+        <service id="simple_things_form_extra.form.type.plain" class="%simple_things_form_extra.form.type.plain.class%">
             <tag name="form.type" alias="plain" />
         </service>
         
-        <service id="comways_form_extra.form.type.image" class="%comways_form_extra.form.type.image.class%">
+        <service id="simple_things_form_extra.form.type.image" class="%simple_things_form_extra.form.type.image.class%">
             <tag name="form.type" alias="image" />
         </service>
         
-        <service id="comways_form_extra.form.type.file_set" class="%comways_form_extra.form.type.file_set.class%" scope="request">
+        <service id="simple_things_form_extra.form.type.file_set" class="%simple_things_form_extra.form.type.file_set.class%" scope="request">
             <tag name="form.type" alias="file_set" />
         </service>
 
-        <service id="comways_form_extra.form.extension.field" class="%comways_form_extra.form.extension.field.class%">
+        <service id="simple_things_form_extra.form.extension.field" class="%simple_things_form_extra.form.extension.field.class%">
             <tag name="form.type_extension" alias="field" />
         </service>
     </services>

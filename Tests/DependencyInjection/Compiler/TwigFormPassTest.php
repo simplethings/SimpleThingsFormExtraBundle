@@ -1,8 +1,8 @@
 <?php
 
-namespace Comways\FormExtraBundle\DependencyInjection\Compiler;
+namespace SimpleThings\FormExtraBundle\DependencyInjection\Compiler;
 
-use Comways\FormExtraBundle\DependencyInjection\Compiler\TwigFormPass;
+use SimpleThings\FormExtraBundle\DependencyInjection\Compiler\TwigFormPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class TwigFormPassTest extends \PHPUnit_Framework_TestCase
@@ -21,7 +21,7 @@ class TwigFormPassTest extends \PHPUnit_Framework_TestCase
         $pass->process($container);
 
         $this->assertEquals(array(
-            'ComwaysFormExtraBundle:Form:div_layout.html.twig',
+            'SimpleThingsFormExtraBundle:Form:div_layout.html.twig',
         ), $container->getParameter('twig.form.resources'));
     }
 }

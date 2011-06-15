@@ -1,9 +1,9 @@
 <?php
 
-namespace Comways\FormExtraBundle\Tests\Form\DataTransformer;
+namespace SimpleThings\FormExtraBundle\Tests\Form\DataTransformer;
 
 use Symfony\Component\HttpFoundation\Request;
-use Comways\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
+use SimpleThings\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
 
 class RecaptchaTransformerTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,7 +52,7 @@ class RecaptchaTransformerTest extends \PHPUnit_Framework_TestCase
 
     protected function getRecaptchaMock()
     {
-        return $this->getMock('Comways\FormExtraBundle\Service\Recaptcha', array(
+        return $this->getMock('SimpleThings\FormExtraBundle\Service\Recaptcha', array(
             'isValid'
         ), array(new Request(), 'my-public-key'));
     }
