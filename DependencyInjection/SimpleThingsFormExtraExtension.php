@@ -24,7 +24,7 @@ class SimpleThingsFormExtraExtension extends Extension
 
     public function getAlias()
     {
-        return 'simple_things';
+        return 'simple_things_form_extra';
     }
 }
 

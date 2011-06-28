@@ -24,4 +24,9 @@ class PlainType extends AbstractType
             'property_path' => false,
         );
     }
+    
+    public function getName()
+    {
+        return 'formextra_plain';
+    }
 }

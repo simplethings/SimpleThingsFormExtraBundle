@@ -58,7 +58,7 @@ class FileSetType extends AbstractType
     
     public function getName()
     {
-        return 'fileset';
+        return 'formextra_fileset';
     }
     
     public function getParent(array $options)

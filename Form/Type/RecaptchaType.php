@@ -116,6 +116,6 @@ class RecaptchaType extends AbstractType
      */
     public function getName()
     {
-        return 'recaptcha';
+        return 'formextra_recaptcha';
     }
 }

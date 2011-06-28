@@ -27,7 +27,7 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testNameAndParent()
     {
-        $this->assertEquals('recaptcha', $this->type->getName());
+        $this->assertEquals('formextra_recaptcha', $this->type->getName());
         $this->assertEquals('form', $this->type->getParent(array()));
     }
 

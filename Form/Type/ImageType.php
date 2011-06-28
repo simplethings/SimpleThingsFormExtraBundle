@@ -55,7 +55,8 @@ class ImageType extends AbstractType
         $data = $form->getData();
         
         if ($data && (strpos($data->getPath(), $form->getAttribute('base_path')) === 0)) {
-            $uri = str_replace($form->getAttribute('base_path'), $form->getAttribute('base_uri'), $data->getPath());
+            /* @var $data SplFileInfo */
+            $uri = str_replace($form->getAttribute('base_path'), $form->getAttribute('base_uri'), $data->getRealPath());
             $view->set('image_uri', $uri);
         } else if ($form->hasAttribute ('no_image_placeholder_uri') && $uri = $form->getAttribute ('no_image_placeholder_uri')) {
             $view->setAttribute('image_uri', $uri);
@@ -103,6 +104,6 @@ class ImageType extends AbstractType
      */
     public function getName()
     {
-        return 'image';
+        return 'formextra_image';
     }
 }

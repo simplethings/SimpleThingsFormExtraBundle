@@ -20,7 +20,7 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
     
     public function testNameAndParent()
     {
-        $this->assertEquals('image', $this->type->getName());
+        $this->assertEquals('formextra_image', $this->type->getName());
         $this->assertEquals('file', $this->type->getParent(array()));
     }
     
@@ -65,7 +65,7 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
         $options = array(
             'base_path'                 => __DIR__,
             'base_uri'                  => 'http://example.com',
-            'no_image_placeholder_uri'  => '',
+            'no_image_placeholder_uri'  => 'empty.jpg',
             'image_alt'                 => '',
             'image_width'               => false,
             'image_height'              => false,
