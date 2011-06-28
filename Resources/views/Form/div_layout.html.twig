@@ -1,4 +1,4 @@
-{% block recaptcha_widget %}
+{% block formextra_recaptcha_widget %}
 {% spaceless %}
     <script type="text/javascript">
         var RecaptchaOptions = {{ widget_options|default({})|json_encode|raw }};
@@ -13,7 +13,7 @@
 {% endspaceless %}
 {% endblock %}
 
-{% block image_widget %}
+{% block formextra_image_widget %}
 {% spaceless %}
     <div class="form_image">
         {% if image_uri is defined %}
@@ -29,7 +29,7 @@
 {% endspaceless %}
 {% endblock %}
 
-{% block fileset_widget %}
+{% block formextra_fileset_widget %}
     <ul>
     {% for file in files %}
         {% spaceless %}
@@ -48,7 +48,7 @@
     </div>
 {% endblock %}
 
-{% block plain_widget %}
+{% block formextra_plain_widget %}
     <div {{ block('container_attributes') }}>
         <p {{ block('attributes') }}>{{ value|escape }}</p>
     </div>
