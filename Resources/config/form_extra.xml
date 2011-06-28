@@ -26,15 +26,15 @@
         </service>
 
         <service id="simple_things_form_extra.form.type.plain" class="%simple_things_form_extra.form.type.plain.class%">
-            <tag name="form.type" alias="plain" />
+            <tag name="form.type" alias="formextra_plain" />
         </service>
         
         <service id="simple_things_form_extra.form.type.image" class="%simple_things_form_extra.form.type.image.class%">
-            <tag name="form.type" alias="image" />
+            <tag name="form.type" alias="formextra_image" />
         </service>
         
         <service id="simple_things_form_extra.form.type.file_set" class="%simple_things_form_extra.form.type.file_set.class%" scope="request">
-            <tag name="form.type" alias="file_set" />
+            <tag name="form.type" alias="formextra_fileset" />
         </service>
 
         <service id="simple_things_form_extra.form.extension.field" class="%simple_things_form_extra.form.extension.field.class%">
