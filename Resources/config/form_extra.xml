@@ -20,7 +20,7 @@
         </service>
 
         <service id="simple_things_form_extra.form.type.recaptcha" class="%simple_things_form_extra.form.type.recaptcha.class%" scope="request">
-            <tag name="form.type" alias="recaptcha" />
+            <tag name="form.type" alias="formextra_recaptcha" />
             <argument type="service" id="simple_things_form_extra.service.recaptcha" />
             <argument />
         </service>
