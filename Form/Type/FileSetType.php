@@ -1,13 +1,13 @@
 <?php
 
-namespace Comways\FormExtraBundle\Form\Type;
+namespace SimpleThings\FormExtraBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType; 
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Comways\FormExtraBundle\Form\DataTransformer\FileSetTransformer;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use SimpleThings\FormExtraBundle\Form\DataTransformer\FileSetTransformer;
 
 /**
  * Extends the File type not to handle a single file, but allowing to incrementally add one more file to a set.

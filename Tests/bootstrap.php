@@ -6,7 +6,7 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
-    'Comways\\FormExtraBundle' => '../../',
+    'SimpleThings\\FormExtraBundle' => '../../',
     'Symfony' => $_SERVER['SYMFONY'],
 ));
 $loader->register();

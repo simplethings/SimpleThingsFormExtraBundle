@@ -1,4 +1,4 @@
-ComwaysFormExtraBundle
+SimpleThingsFormExtraBundle
 ----------------------
 
 This bundle contains additional functionality for Symfony2's Form Component.
@@ -19,7 +19,7 @@ Contributors
 ============
 
 Thanks to all who have helped make this bundle awesome. For a list of people who have helped you
-should visit this page: https://github.com/Comways/ComwaysFormExtraBundle/contributors.
+should visit this page: https://github.com/SimpleThings/SimpleThingsFormExtraBundle/contributors.
 
 Contributing
 ============
@@ -33,11 +33,11 @@ Fire up a terminal and either clone this repository or add it as a submodule bot
 by example.
 
 ``` shell
-$ git clone git://github.com/Comways/ComwaysFormExtraBundle.git vendor/bundles/Comways/FormExtraBundle
+$ git clone git://github.com/SimpleThings/SimpleThingsFormExtraBundle.git vendor/bundles/SimpleThings/FormExtraBundle
 ```
 
 ``` shell
-$ git submodule add git://github.com/Comways/ComwaysFormExtraBundle.git vendor/bundles/Comways/FormExtraBundle
+$ git submodule add git://github.com/SimpleThings/SimpleThingsFormExtraBundle.git vendor/bundles/SimpleThings/FormExtraBundle
 ```
 
 the enable to the bundle inside your kernel class normally called `AppKernel.php`
@@ -48,7 +48,7 @@ the enable to the bundle inside your kernel class normally called `AppKernel.php
 public function registerBundles()
 {
     // ...
-    new Comways\FormExtraBundle\ComwaysFormExtraBundle(),
+    new SimpleThings\FormExtraBundle\SimpleThingsFormExtraBundle(),
     // ...
 }
 ```
@@ -67,20 +67,20 @@ $builder->add('recaptcha', 'recaptcha');
 
 ``` yaml
 # app/config/config.yml
-comways_form_extra:
+simple_things_form_extra:
     recaptcha:
         private_key: "your-private-key"
         public_key:  "your-public-key"
 ```
 
 When doing functional testing it is not possible to use the real Google Recaptcha API therefor there is
-a `Comways\FormExtraBundle\FunctionalTest\Recaptcha` which always returns true.
+a `SimpleThings\FormExtraBundle\FunctionalTest\Recaptcha` which always returns true.
 
 It can be used by overwriting the DependencyInjection parameter in app/config/config_test.yml
 
 ``` yaml
 parameters:
-    comways_form_extra.service.recaptcha.class: Comways\FormExtraBundle\FunctionalTest\Recaptcha
+    simple_things_form_extra.service.recaptcha.class: SimpleThings\FormExtraBundle\FunctionalTest\Recaptcha
 ```
 
 ## PlainType

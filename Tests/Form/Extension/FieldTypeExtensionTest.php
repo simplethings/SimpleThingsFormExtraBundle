@@ -1,10 +1,10 @@
 <?php
 
-namespace Comways\FormExtraBundle\Tests\Form\Extension;
+namespace SimpleThings\FormExtraBundle\Tests\Form\Extension;
 
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilder;
-use Comways\FormExtraBundle\Form\Extension\FieldTypeExtension;
+use SimpleThings\FormExtraBundle\Form\Extension\FieldTypeExtension;
 
 class FieldTypeExtensionTest extends \PHPUnit_Framework_TestCase
 {

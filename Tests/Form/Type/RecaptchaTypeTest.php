@@ -1,12 +1,12 @@
 <?php
 
-namespace Comways\FormExtraBundle\Tests\Form\Type;
+namespace SimpleThings\FormExtraBundle\Tests\Form\Type;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormView;
-use Comways\FormExtraBundle\Form\Type\RecaptchaType;
-use Comways\FormExtraBundle\Service\Recaptcha;
+use SimpleThings\FormExtraBundle\Form\Type\RecaptchaType;
+use SimpleThings\FormExtraBundle\Service\Recaptcha;
 
 class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
 {
@@ -57,7 +57,7 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
         
         $transformers = $this->builder->getClientTransformers();
         $this->assertEquals(1, count($transformers));
-        $this->assertInstanceOf('Comways\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer', $transformers[0]);
+        $this->assertInstanceOf('SimpleThings\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer', $transformers[0]);
     }
 
     public function testBuildView()

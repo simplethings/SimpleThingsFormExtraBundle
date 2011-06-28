@@ -1,6 +1,6 @@
 <?php
 
-namespace Comways\FormExtraBundle\Form\Type;
+namespace SimpleThings\FormExtraBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType; 
 use Symfony\Component\Form\FormBuilder;

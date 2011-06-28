@@ -1,6 +1,8 @@
 <?php
 
-namespace Comways\FormExtraBundle\FunctionalTest;
+namespace SimpleThings\FormExtraBundle\FunctionalTest;
+
+use SimpleThings\FormExtraBundle\Service\Recaptcha as BaseRecaptcha;
 
 /**
  * A Recaptcha Service class that always returns true.
@@ -8,7 +10,7 @@ namespace Comways\FormExtraBundle\FunctionalTest;
  *
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class Recaptcha extends \Comways\FormExtraBundle\Service\Recaptcha
+class Recaptcha extends BaseRecaptcha
 {
     /**
      * @param string $challenge

@@ -1,6 +1,6 @@
 <?php
 
-namespace Comways\FormExtraBundle\Form\Type;
+namespace SimpleThings\FormExtraBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType; 
 use Symfony\Component\Form\FormBuilder;
@@ -8,8 +8,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 
-use Comways\FormExtraBundle\Service\Recaptcha;
-use Comways\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
+use SimpleThings\FormExtraBundle\Service\Recaptcha;
+use SimpleThings\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
 
 /**
  * A ReCaptcha type for use with Google ReCatpcha services. It embeds two fields that are used

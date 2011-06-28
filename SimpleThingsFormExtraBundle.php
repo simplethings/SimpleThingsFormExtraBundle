@@ -1,12 +1,12 @@
 <?php
 
-namespace Comways\FormExtraBundle;
+namespace SimpleThings\FormExtraBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Comways\FormExtraBundle\DependencyInjection\Compiler\TwigFormPass;
+use SimpleThings\FormExtraBundle\DependencyInjection\Compiler\TwigFormPass;
 
-class ComwaysFormExtraBundle extends Bundle
+class SimpleThingsFormExtraBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

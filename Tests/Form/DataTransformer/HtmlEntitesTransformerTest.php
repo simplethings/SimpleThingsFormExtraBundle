@@ -1,8 +1,8 @@
 <?php
 
-namespace Comways\FormExtraBundle\Tests\Form\DataTransformer;
+namespace SimpleThings\FormExtraBundle\Tests\Form\DataTransformer;
 
-use Comways\FormExtraBundle\Form\DataTransformer\HtmlEntitiesTransformer;
+use SimpleThings\FormExtraBundle\Form\DataTransformer\HtmlEntitiesTransformer;
 
 class HtmlEntitiesTransformersTest extends \PHPUnit_Framework_TestCase
 {
