@@ -1,6 +1,6 @@
 <?php
 
-namespace Comways\FormExtraBundle\DependencyInjection\Compiler;
+namespace SimpleThings\FormExtraBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -20,7 +20,7 @@ class TwigFormPass implements CompilerPassInterface
 
         $container->setParameter('twig.form.resources', array_merge(
             $container->getParameter('twig.form.resources'),
-            array('ComwaysFormExtraBundle:Form:div_layout.html.twig')
+            array('SimpleThingsFormExtraBundle:Form:div_layout.html.twig')
         ));
     }
 }

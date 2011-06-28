@@ -1,8 +1,8 @@
 <?php
 
-namespace Comways\FormExtraBundle\Tests\FunctionalTest;
+namespace SimpleThings\FormExtraBundle\Tests\FunctionalTest;
 
-use Comways\FormExtraBundle\FunctionalTest\Recaptcha;
+use SimpleThings\FormExtraBundle\FunctionalTest\Recaptcha;
 use Symfony\Component\HttpFoundation\Request;
 
 class RecaptchaTest extends \PHPUnit_Framework_TestCase

@@ -1,8 +1,8 @@
 <?php
 
-namespace Comways\FormExtraBundle\Tests\Form\DataTransformer;
+namespace SimpleThings\FormExtraBundle\Tests\Form\DataTransformer;
 
-use Comways\FormExtraBundle\Form\DataTransformer\StripTagsTransformer;
+use SimpleThings\FormExtraBundle\Form\DataTransformer\StripTagsTransformer;
 
 class StripTagsTransformerTest extends \PHPUnit_Framework_TestCase
 {

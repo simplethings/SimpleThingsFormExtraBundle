@@ -1,8 +1,8 @@
 <?php
 
-namespace Comways\FormExtraBundle\Tests\Form\Type;
+namespace SimpleThings\FormExtraBundle\Tests\Form\Type;
 
-use Comways\FormExtraBundle\Form\Type\PlainType;
+use SimpleThings\FormExtraBundle\Form\Type\PlainType;
 
 class PlainTypeTest extends \PHPUnit_Framework_TestCase
 {

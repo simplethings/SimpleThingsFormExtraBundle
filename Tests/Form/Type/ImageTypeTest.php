@@ -1,12 +1,12 @@
 <?php
 
-namespace Comways\FormExtraBundle\Tests\Form\Type;
+namespace SimpleThings\FormExtraBundle\Tests\Form\Type;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormView;
-use Comways\FormExtraBundle\Form\Type\ImageType;
 use Symfony\Component\HttpFoundation\File\File;
+use SimpleThings\FormExtraBundle\Form\Type\ImageType;
 
 class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
 {

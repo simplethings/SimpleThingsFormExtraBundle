@@ -1,6 +1,6 @@
 <?php
 
-namespace Comways\FormExtraBundle\DependencyInjection;
+namespace SimpleThings\FormExtraBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -11,7 +11,7 @@ class Configuration implements ConfigurationInterface
     {
         $builder = new TreeBuilder();
 
-        return $builder->root('comways_form_extra')
+        return $builder->root('simple_things_form_extra')
             ->children()
                 ->arrayNode('recaptcha')
                     ->children()
