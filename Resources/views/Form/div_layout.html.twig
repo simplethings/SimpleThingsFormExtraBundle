@@ -23,9 +23,8 @@
         {% endif %}
     </div>
 
-    <div {{ block('container_attributes') }}>
-        {{ form_widget(form.file) }}
-    </div>
+    {% set type = type|default('text') %}
+    <input type="{{ type }}" {{ block('attributes') }} value="{{ value }}" />
 {% endspaceless %}
 {% endblock %}
 
@@ -43,9 +42,8 @@
     {% endfor %}
     </ul>
 
-    <div {{ block('container_attributes') }}>
-        {{ form_widget(form.file) }}
-    </div>
+    {% set type = type|default('text') %}
+    <input type="{{ type }}" {{ block('attributes') }} value="{{ value }}" />
 {% endblock %}
 
 {% block formextra_plain_widget %}
