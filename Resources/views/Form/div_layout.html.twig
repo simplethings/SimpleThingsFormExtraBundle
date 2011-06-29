@@ -24,7 +24,7 @@
     </div>
 
     {% set type = type|default('text') %}
-    <input type="{{ type }}" {{ block('attributes') }} value="{{ value }}" />
+    <input type="{{ type }}" {{ block('widget_attributes') }} value="{{ value }}" />
 {% endspaceless %}
 {% endblock %}
 
@@ -43,11 +43,11 @@
     </ul>
 
     {% set type = type|default('text') %}
-    <input type="{{ type }}" {{ block('attributes') }} value="{{ value }}" />
+    <input type="{{ type }}" {{ block('widget_attributes') }} value="{{ value }}" />
 {% endblock %}
 
 {% block formextra_plain_widget %}
     <div {{ block('container_attributes') }}>
-        <p {{ block('attributes') }}>{{ value|escape }}</p>
+        <p {{ block('widget_attributes') }}>{{ value|escape }}</p>
     </div>
 {% endblock %}
