@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\Exception\FormException;
 use Symfony\Component\HttpFoundation\Request;
 
 use SimpleThings\FormExtraBundle\Service\Recaptcha;
@@ -57,6 +58,10 @@ class RecaptchaType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
+        if ((string) $this->publicKey === '') {
+            throw new FormException('A public key must be set and not empty.');
+        }
+
         $builder
             ->add('recaptcha_challenge_field', 'text')
             ->add('recaptcha_response_field', 'hidden', array(
