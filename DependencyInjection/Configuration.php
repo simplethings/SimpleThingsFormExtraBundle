@@ -14,6 +14,7 @@ class Configuration implements ConfigurationInterface
         return $builder->root('simple_things_form_extra')
             ->children()
                 ->arrayNode('recaptcha')
+                    ->canBeUnset()
                     ->children()
                         ->scalarNode('public_key')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('private_key')->isRequired()->cannotBeEmpty()->end()
