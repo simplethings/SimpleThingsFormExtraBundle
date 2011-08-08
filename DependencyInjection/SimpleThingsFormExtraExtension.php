@@ -18,8 +18,13 @@ class SimpleThingsFormExtraExtension extends Extension
         $processor = new Processor();
         $config = $processor->processConfiguration(new Configuration(), $configs);
 
-        $container->getDefinition('simple_things_form_extra.service.recaptcha')->replaceArgument(1, $config['recaptcha']['private_key']);
-        $container->getDefinition('simple_things_form_extra.form.type.recaptcha')->replaceArgument(1, $config['recaptcha']['public_key']);
+        if (isset($config['recaptcha']['private_key'])) {
+            $container->getDefinition('simple_things_form_extra.service.recaptcha')->replaceArgument(1, $config['recaptcha']['private_key']);
+        }
+
+        if (isset($config['recaptcha']['public_key'])) {
+            $container->getDefinition('simple_things_form_extra.form.type.recaptcha')->replaceArgument(1, $config['recaptcha']['public_key']);
+        }
     }
 
     public function getAlias()

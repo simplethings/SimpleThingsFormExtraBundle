@@ -44,4 +44,11 @@ class SimpleThingsFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($container->hasDefinition('simple_things_form_extra.' . $definition));
         }
     }
+
+    public function testLoadAllowsEmptyConfig()
+    {
+        $container = new ContainerBuilder();
+        $extension = new SimpleThingsFormExtraExtension();
+        $extension->load(array(array()), $container);
+    }
 }
