@@ -5,34 +5,21 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="simple_things_form_extra.form.type.recaptcha.class">SimpleThings\FormExtraBundle\Form\Type\RecaptchaType</parameter>
         <parameter key="simple_things_form_extra.form.type.image.class">SimpleThings\FormExtraBundle\Form\Type\ImageType</parameter>
         <parameter key="simple_things_form_extra.form.type.plain.class">SimpleThings\FormExtraBundle\Form\Type\PlainType</parameter>
         <parameter key="simple_things_form_extra.form.type.file_set.class">SimpleThings\FormExtraBundle\Form\Type\FileSetType</parameter>
         <parameter key="simple_things_form_extra.form.extension.field.class">SimpleThings\FormExtraBundle\Form\Extension\FieldTypeExtension</parameter>
-        <parameter key="simple_things_form_extra.service.recaptcha.class">SimpleThings\FormExtraBundle\Service\Recaptcha</parameter>
     </parameters>
 
     <services>
-        <service id="simple_things_form_extra.service.recaptcha" class="%simple_things_form_extra.service.recaptcha.class%" scope="request">
-            <argument type="service" id="request" />
-            <argument />
-        </service>
-
-        <service id="simple_things_form_extra.form.type.recaptcha" class="%simple_things_form_extra.form.type.recaptcha.class%" scope="request">
-            <tag name="form.type" alias="formextra_recaptcha" />
-            <argument type="service" id="simple_things_form_extra.service.recaptcha" />
-            <argument />
-        </service>
-
         <service id="simple_things_form_extra.form.type.plain" class="%simple_things_form_extra.form.type.plain.class%">
             <tag name="form.type" alias="formextra_plain" />
         </service>
-        
+
         <service id="simple_things_form_extra.form.type.image" class="%simple_things_form_extra.form.type.image.class%">
             <tag name="form.type" alias="formextra_image" />
         </service>
-        
+
         <service id="simple_things_form_extra.form.type.file_set" class="%simple_things_form_extra.form.type.file_set.class%" scope="request">
             <tag name="form.type" alias="formextra_fileset" />
         </service>
