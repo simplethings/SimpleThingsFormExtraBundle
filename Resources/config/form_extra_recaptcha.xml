@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="simple_things_form_extra.form.type.recaptcha.class">SimpleThings\FormExtraBundle\Form\Type\RecaptchaType</parameter>
+        <parameter key="simple_things_form_extra.service.recaptcha.class">SimpleThings\FormExtraBundle\Service\Recaptcha</parameter>
+    </parameters>
+
+    <services>
+        <service id="simple_things_form_extra.service.recaptcha" class="%simple_things_form_extra.service.recaptcha.class%" scope="request">
+            <argument type="service" id="request" />
+            <argument />
+        </service>
+
+        <service id="simple_things_form_extra.form.type.recaptcha" class="%simple_things_form_extra.form.type.recaptcha.class%" scope="request">
+            <tag name="form.type" alias="formextra_recaptcha" />
+            <argument type="service" id="simple_things_form_extra.service.recaptcha" />
+            <argument />
+        </service>
+    </services>
+</container>
