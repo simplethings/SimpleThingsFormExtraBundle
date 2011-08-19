@@ -42,7 +42,7 @@ class Recaptcha
     public function isValid($challenge = null, $response = null)
     {
         $parameters = array(
-            'remoteip'    => $this->request->server->get('REMOVE_ADDR', '127.0.0.1'),
+            'remoteip'    => $this->request->server->get('REMOTE_ADDR', '127.0.0.1'),
             'privatekey'  => $this->privateKey,
             'response'    => $this->request->get('recaptcha_response_field', $response),
             'challenge'   => $this->request->get('recaptcha_challenge_field', $challenge),
