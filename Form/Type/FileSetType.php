@@ -28,7 +28,11 @@ class FileSetType extends AbstractType
     
     public function buildView(FormView $view, FormInterface $form)
     {
-        $data = $form->getData();        
+        $data = $form->getData();
+        if ($data === null) {
+            $data = array();
+        }
+        
         if (!is_array($data)) {
             throw new UnexpectedTypeException($data, 'array');
         }
