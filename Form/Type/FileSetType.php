@@ -2,7 +2,7 @@
 
 namespace SimpleThings\FormExtraBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType; 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -11,10 +11,10 @@ use SimpleThings\FormExtraBundle\Form\DataTransformer\FileSetTransformer;
 
 /**
  * Extends the File type not to handle a single file, but allowing to incrementally add one more file to a set.
- * 
+ *
  * @example:
  *     $builder->add('attachments', 'fileset');
- * 
+ *
  * @author Benjamin Eberlei <eberlei@simplethings.de>
  */
 class FileSetType extends AbstractType
@@ -25,18 +25,20 @@ class FileSetType extends AbstractType
         $builder->setAttribute('delete_route', $options['delete_route']);
         $builder->setAttribute('delete_id', $options['delete_id']);
     }
-    
+
     public function buildView(FormView $view, FormInterface $form)
     {
         $data = $form->getData();
         if ($data === null) {
             $data = array();
+        } else if ($data instanceof File) {
+            $data = array($data);
         }
-        
+
         if (!is_array($data)) {
             throw new UnexpectedTypeException($data, 'array');
         }
-        
+
         $files = array();
         foreach ($data as $file) {
             if ($file instanceof File) {
@@ -51,7 +53,7 @@ class FileSetType extends AbstractType
         $view->set('delete_route', $form->getAttribute('delete_route'));
         $view->set('delete_id', $form->getAttribute('delete_id'));
     }
-    
+
     public function getDefaultOptions(array $options)
     {
         return array(
@@ -59,12 +61,12 @@ class FileSetType extends AbstractType
             'delete_id' => false,
         );
     }
-    
+
     public function getName()
     {
         return 'formextra_fileset';
     }
-    
+
     public function getParent(array $options)
     {
         return 'file';
