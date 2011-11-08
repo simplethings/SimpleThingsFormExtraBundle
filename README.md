@@ -61,7 +61,7 @@ Usage
 ``` php
 <?php
 // ...
-$builder->add('recaptcha', 'recaptcha');
+$builder->add('recaptcha', 'formextra_recaptcha');
 // ...
 ```
 
@@ -92,7 +92,7 @@ field from being bound if the form is tampered with.
 ``` php
 <?php
 // ...
-$builder->add('username', 'plain');
+$builder->add('username', 'formextra_plain');
 // ...
 ```
 
@@ -138,7 +138,7 @@ Using the builder to create a field for this type would then look like:
 
 ``` php
 <?php
-$builder->add('newAttachment', 'fileset', array(
+$builder->add('newAttachment', 'formextra_fileset', array(
     'type' => 'file',
 ));
 ```
@@ -150,7 +150,7 @@ deleting.
 
 ### FieldTypeExtension
 
-A Field Extension contains method called by FormBuilder or createView. Theese applies to all fields
+A Field Extension contains method called by FormBuilder or createView. These applies to all fields
 specified in the dic tag alias.
 
 This example will preset the class attribute on the rendered textarea html element.
