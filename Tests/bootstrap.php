@@ -1,18 +1,13 @@
 <?php
 
-if (isset($_SERVER['TRAVIS']) && !isset($_SERVER['SYMFONY'])) {
-    $_SERVER['SYMFONY'] = __DIR__ . '/../vendor/symfony/src';
+if (!@include __DIR__ . '/../vendor/.composer/autoload.php') {
+    die(<<<'EOT'
+You must set up the project dependencies, run the following commands:
+wget http://getcomposer.org/composer.phar
+php composer.phar install
+EOT
+    );
 }
-
-require_once $_SERVER['SYMFONY'] . '/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-
-use Symfony\Component\ClassLoader\UniversalClassLoader;
-
-$loader = new UniversalClassLoader();
-$loader->registerNamespaces(array(
-    'Symfony' => $_SERVER['SYMFONY'],
-));
-$loader->register();
 
 spl_autoload_register(function($class) {
     if (0 === strpos($class, 'SimpleThings\\FormExtraBundle\\')) {
