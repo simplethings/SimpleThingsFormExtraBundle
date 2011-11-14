@@ -1,6 +1,8 @@
 SimpleThingsFormExtraBundle
 ----------------------
 
+[![Build Status](https://secure.travis-ci.org/simplethings/SimpleThingsFormExtraBundle.png)](http://travis-ci.org/simplethings/SimpleThingsFormExtraBundle)
+
 This bundle contains additional functionality for Symfony2's Form Component.
 
 Currently this Bundle provides the following:
