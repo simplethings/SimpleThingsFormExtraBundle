@@ -1,3 +1,5 @@
 phpunit.xml
 coverage
 vendor
+composer.phar
+composer.lock
