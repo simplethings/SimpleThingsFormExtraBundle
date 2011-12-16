@@ -31,10 +31,10 @@
         </service>
         
         <service id="simple_things_form_extra.form.extension.validation" class="%simple_things_form_extra.form.extension.validation.class%">
-            <tag name="form.type_extension" alias="validation" />
-            <argument type="service" id="validation" />
+            <tag name="form.extension" alias="validation" />
             <argument>%simple_things_form_extra.client_validation.objects%</argument>
-        </service>        
+        </service>
+        
         
     </services>
 </container>
