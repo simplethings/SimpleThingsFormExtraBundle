@@ -9,6 +9,8 @@
         <parameter key="simple_things_form_extra.form.type.plain.class">SimpleThings\FormExtraBundle\Form\Type\PlainType</parameter>
         <parameter key="simple_things_form_extra.form.type.file_set.class">SimpleThings\FormExtraBundle\Form\Type\FileSetType</parameter>
         <parameter key="simple_things_form_extra.form.extension.field.class">SimpleThings\FormExtraBundle\Form\Extension\FieldTypeExtension</parameter>
+        <parameter key="simple_things_form_extra.form.extension.validation.class">SimpleThings\FormExtraBundle\Form\Extension\ValidationTypeExtension</parameter>
+        <parameter key="simple_things_form_extra.client_validation.objects" type="collection" />
     </parameters>
 
     <services>
@@ -27,5 +29,12 @@
         <service id="simple_things_form_extra.form.extension.field" class="%simple_things_form_extra.form.extension.field.class%">
             <tag name="form.type_extension" alias="field" />
         </service>
+        
+        <service id="simple_things_form_extra.form.extension.validation" class="%simple_things_form_extra.form.extension.validation.class%">
+            <tag name="form.type_extension" alias="validation" />
+            <argument type="service" id="validation" />
+            <argument>%simple_things_form_extra.client_validation.objects%</argument>
+        </service>        
+        
     </services>
 </container>

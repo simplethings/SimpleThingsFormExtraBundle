@@ -17,11 +17,15 @@ class SimpleThingsFormExtraExtension extends Extension
 
         $processor = new Processor();
         $config = $processor->processConfiguration(new Configuration(), $configs);
-
+        
         if (isset($config['recaptcha'])) {
             $loader->load('form_extra_recaptcha.xml');
             $container->getDefinition('simple_things_form_extra.service.recaptcha')->replaceArgument(1, $config['recaptcha']['private_key']);
             $container->getDefinition('simple_things_form_extra.form.type.recaptcha')->replaceArgument(1, $config['recaptcha']['public_key']);
+        }
+        
+        if (isset($config['client_validation'])) {
+            $container->setParameter('simple_things_form_extra.client_validation.objects', $config['client_validation']['objects']);
         }
     }
 
