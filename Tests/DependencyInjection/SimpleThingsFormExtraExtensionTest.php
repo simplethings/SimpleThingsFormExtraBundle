@@ -17,7 +17,6 @@ class SimpleThingsFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
             'form.type.image.class'      => 'SimpleThings\FormExtraBundle\Form\Type\ImageType',
             'form.type.file_set.class'   => 'SimpleThings\FormExtraBundle\Form\Type\FileSetType',
             'form.type.plain.class'      => 'SimpleThings\FormExtraBundle\Form\Type\PlainType',
-            'form.extension.field.class' => 'SimpleThings\FormExtraBundle\Form\Extension\FieldTypeExtension',
         );
 
         foreach ($parameters as $parameter => $value) {
@@ -28,7 +27,6 @@ class SimpleThingsFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
             'form.type.image',
             'form.type.file_set',
             'form.type.plain',
-            'form.extension.field',
         );
 
         foreach ($definitions as $definition) {
