@@ -168,6 +168,38 @@ $builder->add('body', 'textarea', array(
 // ...
 ```
 
+### TranslationDomainExtension
+
+This field extension provides the forward compatibility for the support of translation domains
+added in Symfony 2.1. So activating it is useful only when using Symfony 2.0 (activating it in
+Symfony 2.1 will add useless overhead)
+
+To use it, you need to activate it and to register the form theme using the translation domain.
+
+``` yaml
+# app/config/config.yml
+simple_things_form_extra:
+    translation_domain_forward_campat: true
+
+twig:
+    form:
+        resources:
+            - SimpleThingsFormExtraBundle:Form:translation_domain.html.twig
+            # eventually other themes here
+```
+
+You can now provide the translation domain used for labels and choice options when building the form:
+
+``` php
+<?php
+// ...
+$builder->add('body', 'textarea', array(
+    'label' => 'some message',
+    'translation_domain' => 'form_extra',
+));
+// ...
+```
+
 ### HtmlEntitiesTransformer
 
 Converts html code into entites. Also extends `htmlentities` function to auto guess the used charset
