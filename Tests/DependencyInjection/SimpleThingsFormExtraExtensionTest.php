@@ -66,6 +66,31 @@ class SimpleThingsFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testLoadTranslationDomain()
+    {
+        $container = new ContainerBuilder();
+        $extension = new SimpleThingsFormExtraExtension();
+        $extension->load(array(array(
+            'translation_domain_forward_compat' => true,
+        )), $container);
+
+        $parameters = array(
+            'form.extension.translation_domain.class' => 'SimpleThings\FormExtraBundle\Form\Extension\TranslationDomainExtension',
+        );
+
+        foreach ($parameters as $parameter => $value) {
+            $this->assertEquals($container->getParameter('simple_things_form_extra.' . $parameter), $value);
+        }
+
+        $definitions = array(
+            'form.extension.translation_domain',
+        );
+
+        foreach ($definitions as $definition) {
+            $this->assertTrue($container->hasDefinition('simple_things_form_extra.' . $definition));
+        }
+    }
+
     public function testLoadAllowsEmptyConfig()
     {
         $container = new ContainerBuilder();
