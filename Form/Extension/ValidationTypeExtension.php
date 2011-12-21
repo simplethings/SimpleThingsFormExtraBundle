@@ -35,20 +35,12 @@ class ValidationTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilder $builder, array $options)
     {
         if (isset($this->validatedObjects[$options['data_class']])) {
-            $builder->setAttribute('data_class', $options['data_class']);
+            $attr = $builder->getAttribute('attr');
+            if(!isset($attr['data-simplethings-validation-class'])) {
+                $attr['data-simplethings-validation-class'] = $options['data_class'];
+                $builder->setAttribute('attr', $attr);
+            }
         }
     }
-
-    /**
-     * @param FormView $view
-     * @param FormInterface $form
-     */
-    public function buildView(FormView $view, FormInterface $form)
-    {
-        if ($form->hasAttribute('data_class')) {
-            $attr = $form->getAttribute('attr');
-            $attr['data-simplethings-validation-class'] = $form->getAttribute('data_class');
-            $view->set('attr', $attr);
-        }
-    }
+    
 }
