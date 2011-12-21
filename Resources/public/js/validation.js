@@ -101,6 +101,7 @@ var simpleThingsFormExtraValidationContraints = {
         }        
         
         if(value.length > constraint.limit) {
+            validator.addViolation(constraint.message, value, {'{{ limit }}': constraint.limit});
             return false;
         }
         return true;
