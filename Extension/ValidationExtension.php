@@ -1,8 +1,8 @@
 <?php
 
-namespace Symfony\Bridge\Twig\Extension;
+namespace SimpleThings\FormExtraBundle\Extension;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  *
@@ -15,13 +15,13 @@ class ValidationExtension extends \Twig_Extension
      *
      * @var ValidatorInterface 
      */
-    private $validation;
+    private $validator;
     
     private $objects;
 
-    public function __construct(ValidatorInterface $validation, array $objects)
+    public function __construct(ValidatorInterface $validator, array $objects)
     {
-        $this->validation = $validation;
+        $this->validator = $validator;
         $this->objects = $objects;
     }
 
@@ -33,30 +33,41 @@ class ValidationExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'simplethings_formextra_validation'  => new \Twig_Function_Method($this, 'getValidationConstraints'),
+            'simplethings_formextra_validation'  => new \Twig_Function_Method($this, 'getValidationConstraints', array('is_safe' => array('html'))),
         );
     }
 
     public function getValidationConstraints()
     {
         
-        $metadataFactory = $this->validation->getMetadataFactory();
+        $metadataFactory = $this->validator->getMetadataFactory();
+        $data = array();
         
-        foreach($objects as $object) {
+        foreach($this->objects as $object) {
+            $data[$object] = array();
+            
             $metadata = $metadataFactory->getClassMetadata($object);
             $properties = $metadata->getConstrainedProperties();
             
-            var_dump($properties);
-            
+            foreach($properties as $propertie) {
+                $data[$object][$propertie] = array();
+                $constraints = $metadata->getMemberMetadatas($propertie);
+                foreach($constraints[0]->constraints as $constraint) {
+                   $data[$object][$propertie][$this->getConstraintName($constraint)] = $constraint;
+                }
+            }
         }
         
-        
-        
-        
-        
-        
+        return \json_encode($data);
         
     }
+    
+    protected function getConstraintName($constraint) {
+        $class = \get_class($constraint);
+        $parts = \explode('\\', $class);
+        return \lcfirst(\array_pop($parts));
+    }
+    
 
 
     /**

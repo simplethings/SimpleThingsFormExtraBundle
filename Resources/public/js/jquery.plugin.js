@@ -1,30 +1,44 @@
+/**
+ * @author David Badura <badura@simplethings.de>
+ */
 (function($, jQuery) {
-    jQuery.fn.simplethingsFormextraValidation = function (options) {
-        options = jQuery.extend({}, jQuery.fn.SimpleThingsFormExtraValidation.defaults, options);
-
+    jQuery.fn.simpleThingsFormExtraValidation = function (options) {
+        options = jQuery.extend({}, jQuery.fn.simpleThingsFormExtraValidation.defaults, options);
+        
         return $(this).each(function() {
-            
-            var self = $(this);
-            
-            self.change(function() {
-                
-                if(options.validator.isValid(self.val(), self.data('simplethings-validation-contraints'))) {
-                    
-                   self.removeClass('error');
-                   self.addClass('success');
-                   
-                } else {
-                    
-                   self.removeClass('success');
-                   self.addClass('error');
 
-                }
+            var objectName = $(this).data('simplethings-validation-class');
+            
+            $(this).find('input').each(function() {
+                
+                var $this = $(this);
+              
+                var name = $this.attr('name');
+                name = name.substr(name.indexOf("[") + 1, name.indexOf("]") - name.indexOf("[") - 1);
+                    
+                $this.change(function() {
+
+                    if(options.validator.isValid($this.val(), options.constraints[objectName][name])) {
+                       options.onSuccess($this);
+                    } else {
+                       options.onError($this, options.validator.violations);
+                    }
+
+                });                    
                 
             });
             
+            
+           
+            
         });
-    }
-    jQuery.fn.SimpleThingsFormExtraValidation.defaults = {
-        validator: simpleThingsFormExtraValidator
-    }
+    };
+    
+    jQuery.fn.simpleThingsFormExtraValidation.defaults = {
+        validator: null,
+        constraints: null,
+        onSuccess: function(object) {},
+        onError: function(object, violations) {}
+    };
+    
 })(jQuery, jQuery);

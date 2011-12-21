@@ -8,9 +8,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilder;
 
 /**
- * Generic extension for fields that allows any attr to be set when building
- * the form.
- *
+ * 
  * @author David Badura <badura@simplethings.de>
  */
 class ValidationTypeExtension extends AbstractTypeExtension
@@ -19,7 +17,7 @@ class ValidationTypeExtension extends AbstractTypeExtension
     
     public function __construct($validatedObjects)
     {
-        $this->validatedObjects = array_keys($validatedObjects);
+        $this->validatedObjects = array_flip($validatedObjects);
     }
     
     /**
@@ -27,7 +25,7 @@ class ValidationTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'field';
+        return 'form';
     }
     
     /**
@@ -47,8 +45,8 @@ class ValidationTypeExtension extends AbstractTypeExtension
      */
     public function buildView(FormView $view, FormInterface $form)
     {
-        if (isset($this->validatedObjects[$options['data_class']])) {
-            $attr = $view->get('attr', array());
+        if ($form->hasAttribute('data_class')) {
+            $attr = $form->getAttribute('attr');
             $attr['data-simplethings-validation-class'] = $form->getAttribute('data_class');
             $view->set('attr', $attr);
         }
