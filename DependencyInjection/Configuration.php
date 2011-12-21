@@ -18,7 +18,6 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('objects')
                             ->prototype('scalar')->end()
-                            ->defaultValue(array())
                         ->end()
                    ->end()
                 ->end()
