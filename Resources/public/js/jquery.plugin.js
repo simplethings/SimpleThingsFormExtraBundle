@@ -9,27 +9,28 @@
 
             var objectName = $(this).data('simplethings-validation-class');
             
-            $(this).find('input').each(function() {
-                
-                var $this = $(this);
-              
-                var name = $this.attr('name');
-                name = name.substr(name.indexOf("[") + 1, name.indexOf("]") - name.indexOf("[") - 1);
-                    
-                $this.change(function() {
+            if(typeof options.constraints[objectName] != 'undefined') {
+                $(this).find('input').each(function() {
 
-                    if(options.validator.isValid($this.val(), options.constraints[objectName][name])) {
-                       options.onSuccess($this);
-                    } else {
-                       options.onError($this, options.validator.violations);
-                    }
+                    var $this = $(this);
 
-                });                    
-                
-            });
-            
-            
-           
+                    var name = $this.attr('name');
+                    name = name.substr(name.indexOf("[") + 1, name.indexOf("]") - name.indexOf("[") - 1);
+
+                    $this.bind(options.event, function() {
+
+                        if(typeof options.constraints[objectName][name] != 'undefined') {
+                            if(options.validator.isValid($this.val(), options.constraints[objectName][name])) {
+                               options.onSuccess($this);
+                            } else {
+                               options.onError($this, options.validator.violations);
+                            }
+                        }
+
+                    });                    
+
+                });
+            }
             
         });
     };
@@ -38,7 +39,8 @@
         validator: null,
         constraints: null,
         onSuccess: function(object) {},
-        onError: function(object, violations) {}
+        onError: function(object, violations) {},
+        event: 'blur'
     };
     
 })(jQuery, jQuery);
