@@ -11,31 +11,33 @@ use Symfony\Component\Validator\Constraint;
 class JsValidationConstraintsGenerator
 {
 
-    protected $objects;
+    /**
+     *
+     * @var ValidatorInterface 
+     */
     protected $validator;
 
     /**
      *
      * @param ValidatorInterface $validator
-     * @param array $objects 
      */
-    public function __construct(ValidatorInterface $validator, array $objects = array())
+    public function __construct(ValidatorInterface $validator)
     {
         $this->validator = $validator;
-        $this->objects = $objects;
     }
 
     /**
-     *
+     * 
+     * @param array $objects 
      * @return string
      */
-    public function generate()
+    public function generate(array $objects)
     {
 
         $metadataFactory = $this->validator->getMetadataFactory();
         $data = array();
 
-        foreach ($this->objects as $object) {
+        foreach ($objects as $object) {
             $data[$object] = array();
 
             $metadata = $metadataFactory->getClassMetadata($object);

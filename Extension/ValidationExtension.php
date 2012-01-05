@@ -20,12 +20,19 @@ class ValidationExtension extends \Twig_Extension
 
     /**
      *
+     * @var array
+     */
+    private $objects;
+    
+    /**
+     *
      * @param ValidatorInterface $validator
      * @param array $objects 
      */
-    public function __construct(JsValidationConstraintsGenerator $generator)
+    public function __construct(JsValidationConstraintsGenerator $generator, array $objects)
     {
         $this->generator = $generator;
+        $this->objects = $objects;
     }
 
     /**
@@ -46,7 +53,7 @@ class ValidationExtension extends \Twig_Extension
      */
     public function getValidationConstraints()
     {
-        return $this->generator->generate();        
+        return $this->generator->generate($this->objects);        
     }
 
     /**

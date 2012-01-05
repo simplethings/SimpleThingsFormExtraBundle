@@ -31,8 +31,9 @@ class GenerateJsValidationConstraintsCommand extends ContainerAwareCommand
             throw new \InvalidArgumentException(sprintf('The target directory "%s" does not exist.', $target));
         }
         
+        $objects = $this->getContainer()->getParameter('simple_things_form_extra.client_validation.objects');
         $generator = $this->getContainer()->get('simple_things_form_extra.js_validation_constraints_generator');
-        $constraints = $generator->generate();
+        $constraints = $generator->generate($objects);
         
         $file = $target . '/' . $input->getOption('name');
         $variable = $input->getOption('variable');
