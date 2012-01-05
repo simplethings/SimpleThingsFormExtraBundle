@@ -2,8 +2,8 @@
 
 namespace SimpleThings\FormExtraBundle\Extension;
 
-use Symfony\Component\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Constraint;
+use SimpleThings\FormExtraBundle\Service\JsValidationConstraintsGenerator;
+
 
 /**
  *
@@ -14,25 +14,18 @@ class ValidationExtension extends \Twig_Extension
     
     /**
      *
-     * @var ValidatorInterface 
+     * @var JsValidationConstraintsGenerator 
      */
-    private $validator;
-    
-    /**
-     *
-     * @var array
-     */
-    private $objects;
-    
+    private $generator;
+
     /**
      *
      * @param ValidatorInterface $validator
      * @param array $objects 
      */
-    public function __construct(ValidatorInterface $validator, array $objects)
+    public function __construct(JsValidationConstraintsGenerator $generator)
     {
-        $this->validator = $validator;
-        $this->objects = $objects;
+        $this->generator = $generator;
     }
 
     /**
@@ -53,41 +46,7 @@ class ValidationExtension extends \Twig_Extension
      */
     public function getValidationConstraints()
     {
-        
-        $metadataFactory = $this->validator->getMetadataFactory();
-        $data = array();
-        
-        foreach ($this->objects as $object) {
-            $data[$object] = array();
-            
-            $metadata = $metadataFactory->getClassMetadata($object);
-            $properties = $metadata->getConstrainedProperties();
-            
-            foreach ($properties as $property) {
-                $data[$object][$property] = array();
-                $constraintsList = $metadata->getMemberMetadatas($property);
-                foreach ($constraintsList as $constraints) {
-                    foreach ($constraints->constraints as $constraint) {
-                       $data[$object][$property][$this->getConstraintName($constraint)] = $constraint;
-                    }
-                }
-            }
-        }
-        
-        return json_encode($data);
-        
-    }
-    
-    /**
-     *
-     * @param Constraint $constraint
-     * @return string 
-     */
-    protected function getConstraintName(Constraint $constraint) 
-    {
-        $class = get_class($constraint);
-        $parts = explode('\\', $class);
-        return lcfirst(array_pop($parts));
+        return $this->generator->generate();        
     }
 
     /**

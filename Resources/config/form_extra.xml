@@ -9,6 +9,7 @@
         <parameter key="simple_things_form_extra.form.type.plain.class">SimpleThings\FormExtraBundle\Form\Type\PlainType</parameter>
         <parameter key="simple_things_form_extra.form.type.file_set.class">SimpleThings\FormExtraBundle\Form\Type\FileSetType</parameter>
         <parameter key="simple_things_form_extra.form.extension.field.class">SimpleThings\FormExtraBundle\Form\Extension\FieldTypeExtension</parameter>
+        <parameter key="simple_things_form_extra.js_validation_constraints_generator.class">SimpleThings\FormExtraBundle\Service\JsValidationConstraintsGenerator</parameter>
         <parameter key="simple_things_form_extra.form.extension.validation.class">SimpleThings\FormExtraBundle\Form\Extension\ValidationTypeExtension</parameter>
         <parameter key="simple_things_form_extra.twig.extension.validation.class">SimpleThings\FormExtraBundle\Extension\ValidationExtension</parameter>
         <parameter key="simple_things_form_extra.client_validation.objects" type="collection" />
@@ -38,9 +39,13 @@
 
         <service id="simple_things_form_extra.twig.extension.validation" class="%simple_things_form_extra.twig.extension.validation.class%">
             <tag name="twig.extension" alias="form" />
+            <argument type="service" id="simple_things_form_extra.js_validation_constraints_generator" />
+        </service>        
+        
+        <service id="simple_things_form_extra.js_validation_constraints_generator" class="%simple_things_form_extra.js_validation_constraints_generator.class%">
             <argument type="service" id="validator" />
             <argument>%simple_things_form_extra.client_validation.objects%</argument>
-        </service>        
+        </service>             
         
     </services>
 </container>
