@@ -85,6 +85,21 @@ parameters:
     simple_things_form_extra.service.recaptcha.class: SimpleThings\FormExtraBundle\FunctionalTest\Recaptcha
 ```
 
+The `formextra_recaptcha` form type takes a `widget_options` setting which is encoded as json and set to the configuration
+javascript variable Recaptcha needs. This allows you to change the theme for the widget or roll your own. For more information
+about what is possible check here http://code.google.com/apis/recaptcha/docs/customization.html.
+
+``` php
+<?php
+// ...
+$builder->add('recaptcha', 'formextra_recaptcha', array(
+    'widget_options' => array(
+        'theme' => 'white', // blackglass, clean, red is the predefined themes.
+    ),
+));
+// ...
+```
+
 ## PlainType
 
 Sometimes it is needed to show the value of a field without having it be an input box. This is where
