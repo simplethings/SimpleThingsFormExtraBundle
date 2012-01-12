@@ -8,18 +8,18 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilder;
 
 /**
- * 
+ *
  * @author David Badura <badura@simplethings.de>
  */
 class ValidationTypeExtension extends AbstractTypeExtension
 {
     private $validatedObjects = array();
-    
+
     public function __construct($validatedObjects)
     {
         $this->validatedObjects = array_flip($validatedObjects);
     }
-    
+
     /**
      * @return string
      */
@@ -27,7 +27,7 @@ class ValidationTypeExtension extends AbstractTypeExtension
     {
         return 'form';
     }
-    
+
     /**
      * @param FormBuilder $builder
      * @param array $options
@@ -42,5 +42,5 @@ class ValidationTypeExtension extends AbstractTypeExtension
             }
         }
     }
-    
+
 }
