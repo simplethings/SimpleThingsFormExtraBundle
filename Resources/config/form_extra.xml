@@ -8,7 +8,6 @@
         <parameter key="simple_things_form_extra.form.type.image.class">SimpleThings\FormExtraBundle\Form\Type\ImageType</parameter>
         <parameter key="simple_things_form_extra.form.type.plain.class">SimpleThings\FormExtraBundle\Form\Type\PlainType</parameter>
         <parameter key="simple_things_form_extra.form.type.file_set.class">SimpleThings\FormExtraBundle\Form\Type\FileSetType</parameter>
-        <parameter key="simple_things_form_extra.form.extension.field.class">SimpleThings\FormExtraBundle\Form\Extension\FieldTypeExtension</parameter>
     </parameters>
 
     <services>
@@ -22,10 +21,6 @@
 
         <service id="simple_things_form_extra.form.type.file_set" class="%simple_things_form_extra.form.type.file_set.class%" scope="request">
             <tag name="form.type" alias="formextra_fileset" />
-        </service>
-
-        <service id="simple_things_form_extra.form.extension.field" class="%simple_things_form_extra.form.extension.field.class%">
-            <tag name="form.type_extension" alias="field" />
         </service>
     </services>
 </container>
