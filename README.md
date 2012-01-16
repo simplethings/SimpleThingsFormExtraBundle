@@ -165,24 +165,6 @@ method to generate a route with parameters "id" and "file", to delete the listed
 passed is not enough you should overwrite the twig template with your own logic to implement
 deleting.
 
-### FieldTypeExtension
-
-A Field Extension contains method called by FormBuilder or createView. These applies to all fields
-specified in the dic tag alias.
-
-This example will preset the class attribute on the rendered textarea html element.
-
-``` php
-<?php
-// ...
-$builder->add('body', 'textarea', array(
-    'attr' => array(
-        'class' => 'niceditor',
-    )
-));
-// ...
-```
-
 ### TranslationDomainExtension
 
 This field extension provides the forward compatibility for the support of translation domains
