@@ -2,10 +2,10 @@
  * @author David Badura <badura@simplethings.de>
  */
 var simpleThingsFormExtraValidator = {
-    
+
     violations: [],
-    
-    isValid: function(value, constraints) { 
+
+    isValid: function(value, constraints) {
         this.violations = [];
         for(var constraint in constraints){
             if(typeof this.constraints[constraint] == 'function') {
@@ -14,14 +14,14 @@ var simpleThingsFormExtraValidator = {
                     return false;
                 }
             }
-        } 
+        }
         return true;
     },
-    
+
     addViolation: function(message, value, constraint) {
         this.violations.push(new this.violation(message, value, constraint));
     },
-    
+
     violation: function(message, value, params) {
 
         this.message = message;
@@ -35,9 +35,9 @@ var simpleThingsFormExtraValidator = {
             }
             return message;
         }
-        
+
     },
-    
+
     constraints: {
         max: function (value, constraint, validator) {
             if (isNaN(value)) {
@@ -85,7 +85,7 @@ var simpleThingsFormExtraValidator = {
                 return false;
             }
 
-            return true;        
+            return true;
         },
         email: function (value, constraint, validator) {
             var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -112,7 +112,7 @@ var simpleThingsFormExtraValidator = {
         maxLength: function (value, constraint, validator) {
             if (null == value || '' == value) {
                 return true;
-            }        
+            }
 
             if(value.length > parseFloat(constraint.limit)) {
                 validator.addViolation(constraint.message, value, {
@@ -126,7 +126,7 @@ var simpleThingsFormExtraValidator = {
         minLength: function (value, constraint, validator) {
             if (null == value || '' == value) {
                 return true;
-            }        
+            }
 
             if(value.length < parseFloat(constraint.limit)) {
                 validator.addViolation(constraint.message, value, {
@@ -143,7 +143,7 @@ var simpleThingsFormExtraValidator = {
                 return false;
             }
 
-            return true;          
+            return true;
         },
         regex: function (value, constraint, validator) {
             if (null == value || '' == value) {
@@ -158,7 +158,7 @@ var simpleThingsFormExtraValidator = {
                 return false;
             }
 
-            return true;     
+            return true;
         },
         size: function (value, constraint, validator) {
             if (isNaN(value)) {
@@ -166,7 +166,7 @@ var simpleThingsFormExtraValidator = {
                     '{{ value }}': value
                 });
                 return false;
-            }        
+            }
 
             if( parseFloat(value) < parseFloat(constraint.min)) {
                 validator.addViolation(constraint.minMessage, value, {
@@ -228,7 +228,19 @@ var simpleThingsFormExtraValidator = {
             return true;
         },
         type: function (value, constraint, validator) {
+            
+            if (null == value || '' == value) {
+                return true;
+            }
+
             switch(constraint.type) {
+                case 'int':
+                case 'integer':
+                case 'digit':
+                    if(isNaN(value) == false && parseInt(value) == value) {
+                        return true;
+                    }
+                    break;
                 case 'numeric':
                     if(isNaN(value) == false) {
                         return true;
@@ -242,7 +254,7 @@ var simpleThingsFormExtraValidator = {
                 default:
                     return true;
             }
-            
+
             validator.addViolation(constraint.message, value, {
                 '{{ value }}': value,
                 '{{ type }}': constraint.type
@@ -256,7 +268,7 @@ var simpleThingsFormExtraValidator = {
             }
 
             return true;
-        },    
+        },
         'false': function (value, constraint, validator) {
             if (null == value) {
                 return true;
