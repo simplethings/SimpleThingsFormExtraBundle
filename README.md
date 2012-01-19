@@ -197,6 +197,28 @@ $builder->add('body', 'textarea', array(
 // ...
 ```
 
+### HelpExtension
+
+This field extension provides help message option.
+
+To use it, you need to load the help extension form theme into your own form theme.
+
+```
+{% use 'SimpleThingsFormExtraBundle:Form:field_type_help.html.twig' %}
+```
+
+You can now provide the help message for field when building the form:
+
+``` php
+<?php
+// ...
+$builder->add('body', 'textarea', array(
+    'label' => 'some message',
+    'help'  => 'some usefull help message'
+));
+// ...
+```
+
 ### HtmlEntitiesTransformer
 
 Converts html code into entites. Also extends `htmlentities` function to auto guess the used charset

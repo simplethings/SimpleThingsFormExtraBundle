@@ -1,0 +1,65 @@
+{% use 'form_div_layout.html.twig' %}
+
+{# Widgets #}
+
+{% block field_help %}
+    {% if help is defined %}
+        <span class="help">{{ help }}</span>
+    {% endif %}
+{% endblock %}
+
+{% block textarea_widget %}
+{% spaceless %}
+    {{ parent() }}
+    {{ block('field_help') }}
+{% endspaceless %}
+{% endblock textarea_widget %}
+
+{% block choice_widget %}
+{% spaceless %}
+    {{ parent() }}
+    {{ block('field_help') }}
+{% endspaceless %}
+{% endblock choice_widget %}
+
+{% block checkbox_widget %}
+{% spaceless %}
+    {{ parent() }}
+    {{ block('field_help') }}
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
+{% block radio_widget %}
+{% spaceless %}
+    {{ parent() }}
+    {{ block('field_help') }}
+{% endspaceless %}
+{% endblock radio_widget %}
+
+{% block datetime_widget %}
+{% spaceless %}
+    {{ parent() }}
+    {{ block('field_help') }}
+{% endspaceless %}
+{% endblock datetime_widget %}
+
+{% block date_widget %}
+{% spaceless %}
+    {{ parent() }}
+    {{ block('field_help') }}
+{% endspaceless %}
+{% endblock date_widget %}
+
+{% block time_widget %}
+{% spaceless %}
+    {{ parent() }}
+    {{ block('field_help') }}
+{% endspaceless %}
+{% endblock time_widget %}
+
+{% block field_widget %}
+{% spaceless %}
+    {{ parent() }}
+    {{ block('field_help') }}
+{% endspaceless %}
+{% endblock field_widget %}
