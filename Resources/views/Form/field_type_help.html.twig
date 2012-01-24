@@ -12,7 +12,7 @@
         {{ form_label(form, label|default(null)) }}
         {{ form_errors(form) }}
         {{ form_widget(form) }}
-        {{ form.vars.help }}
+        {{ block('field_help') }}
     </div>
 {% endspaceless %}
 {% endblock field_row %}
