@@ -14,10 +14,13 @@ class SimpleThingsFormExtraExtension extends Extension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('form_extra.xml');
-        $loader->load('field_type_help.xml');
 
         $processor = new Processor();
         $config = $processor->processConfiguration(new Configuration(), $configs);
+
+        if ($config['help_extension']) {
+            $loader->load('field_type_help.xml');
+        }
 
         if ($config['translation_domain_forward_compat']) {
             $loader->load('translation_domain.xml');

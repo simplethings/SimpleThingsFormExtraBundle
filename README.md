@@ -201,7 +201,14 @@ $builder->add('body', 'textarea', array(
 
 This field extension provides help message option.
 
-To use it, you need to load the help extension form theme into your own form theme.
+To use it, you need to activate it and load the help extension form theme into your own form theme.
+
+``` yaml
+# app/config/config.yml
+simple_things_form_extra:
+    help_extension: true
+```
+
 
 ```
 {% use 'SimpleThingsFormExtraBundle:Form:field_type_help.html.twig' %}
