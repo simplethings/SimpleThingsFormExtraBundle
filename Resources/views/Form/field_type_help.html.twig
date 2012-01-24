@@ -1,5 +1,3 @@
-{% use 'form_div_layout.html.twig' %}
-
 {# Widgets #}
 
 {% block field_help %}
@@ -8,58 +6,13 @@
     {% endif %}
 {% endblock %}
 
-{% block textarea_widget %}
+{% block field_row %}
 {% spaceless %}
-    {{ parent() }}
-    {{ block('field_help') }}
+    <div>
+        {{ form_label(form, label|default(null)) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+        {{ form.vars.help }}
+    </div>
 {% endspaceless %}
-{% endblock textarea_widget %}
-
-{% block choice_widget %}
-{% spaceless %}
-    {{ parent() }}
-    {{ block('field_help') }}
-{% endspaceless %}
-{% endblock choice_widget %}
-
-{% block checkbox_widget %}
-{% spaceless %}
-    {{ parent() }}
-    {{ block('field_help') }}
-{% endspaceless %}
-{% endblock checkbox_widget %}
-
-{% block radio_widget %}
-{% spaceless %}
-    {{ parent() }}
-    {{ block('field_help') }}
-{% endspaceless %}
-{% endblock radio_widget %}
-
-{% block datetime_widget %}
-{% spaceless %}
-    {{ parent() }}
-    {{ block('field_help') }}
-{% endspaceless %}
-{% endblock datetime_widget %}
-
-{% block date_widget %}
-{% spaceless %}
-    {{ parent() }}
-    {{ block('field_help') }}
-{% endspaceless %}
-{% endblock date_widget %}
-
-{% block time_widget %}
-{% spaceless %}
-    {{ parent() }}
-    {{ block('field_help') }}
-{% endspaceless %}
-{% endblock time_widget %}
-
-{% block field_widget %}
-{% spaceless %}
-    {{ parent() }}
-    {{ block('field_help') }}
-{% endspaceless %}
-{% endblock field_widget %}
+{% endblock field_row %}
