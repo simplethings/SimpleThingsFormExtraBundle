@@ -14,6 +14,7 @@ class Configuration implements ConfigurationInterface
         return $builder->root('simple_things_form_extra')
             ->children()
                 ->booleanNode('translation_domain_forward_compat')->defaultFalse()->end()
+                ->booleanNode('help_extension')->defaultFalse()->end()
                 ->arrayNode('recaptcha')
                     ->canBeUnset()
                     ->children()
