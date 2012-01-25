@@ -18,6 +18,10 @@ class SimpleThingsFormExtraExtension extends Extension
         $processor = new Processor();
         $config = $processor->processConfiguration(new Configuration(), $configs);
 
+        if ($config['help_extension']) {
+            $loader->load('field_type_help.xml');
+        }
+
         if ($config['translation_domain_forward_compat']) {
             $loader->load('translation_domain.xml');
         }
