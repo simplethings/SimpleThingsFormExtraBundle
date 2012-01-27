@@ -23,9 +23,14 @@
 
                         if(typeof options.constraints[objectName][name] != 'undefined') {
                             if(options.validator.isValid($this.val(), options.constraints[objectName][name])) {
-                               options.onSuccess($this);
+                               $this.trigger({
+                                   type: 'validationSuccess'
+                               });
                             } else {
-                               options.onError($this, options.validator.violations);
+                               $this.trigger({
+                                   type: 'validationError',
+                                   violations: options.validator.violations
+                               });
                             }
                         }
 
@@ -41,8 +46,6 @@
         validator: null,
         constraints: null,
         onCreate: function(object) {},
-        onSuccess: function(object) {},
-        onError: function(object, violations) {},
         event: 'blur'
     };
 
