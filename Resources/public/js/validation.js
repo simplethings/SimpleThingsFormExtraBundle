@@ -145,6 +145,14 @@ var simpleThingsFormExtraValidator = {
 
             return true;
         },
+        notNull: function (value, constraint, validator) {
+            if ('' == value || null == value) {
+                validator.addViolation(constraint.message, value);
+                return false;
+            }
+
+            return true;
+        },
         regex: function (value, constraint, validator) {
             if (null == value || '' == value) {
                 return true;
@@ -228,7 +236,7 @@ var simpleThingsFormExtraValidator = {
             return true;
         },
         type: function (value, constraint, validator) {
-            
+
             if (null == value || '' == value) {
                 return true;
             }
