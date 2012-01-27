@@ -10,7 +10,7 @@
             var objectName = $(this).data('simplethings-validation-class');
 
             if(typeof options.constraints[objectName] != 'undefined') {
-                $(this).find('input').each(function() {
+                $(this).find('input, select').each(function() {
 
                     var $this = $(this);
 
@@ -19,8 +19,7 @@
 
                     options.onCreate($this);
 
-                    $this.bind(options.event, function() {
-
+                    $this.bind('change', function() {
                         if(typeof options.constraints[objectName][name] != 'undefined') {
                             if(options.validator.isValid($this.val(), options.constraints[objectName][name])) {
                                $this.trigger({
@@ -33,7 +32,10 @@
                                });
                             }
                         }
+                    });
 
+                    $this.bind('blur', function() {
+                        $(this).trigger('change');
                     });
 
                 });
@@ -45,8 +47,7 @@
     jQuery.fn.simpleThingsFormExtraValidation.defaults = {
         validator: null,
         constraints: null,
-        onCreate: function(object) {},
-        event: 'blur'
+        onCreate: function(object) {}
     };
 
 })(jQuery, jQuery);
