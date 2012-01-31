@@ -88,6 +88,10 @@ var simpleThingsFormExtraValidator = {
             return true;
         },
         email: function (value, constraint, validator) {
+            if (null == value || '' == value) {
+                return true;
+            }
+
             var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
             if (!reg.test(value)) {
                 validator.addViolation(constraint.message, value, {
@@ -99,6 +103,10 @@ var simpleThingsFormExtraValidator = {
             return true;
         },
         ip: function (value, constraint, validator) {
+            if (null == value || '' == value) {
+                return true;
+            }
+
             var reg = /(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/;
             if(!reg.test(value)) {
                 validator.addViolation(constraint.message, value, {
@@ -214,6 +222,10 @@ var simpleThingsFormExtraValidator = {
             return true;
         },
         time: function (value, constraint, validator) {
+            if (null == value || '' == value) {
+                return true;
+            }
+
             var reg = /^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])(:([0-5][0-9]))?$/;
             if(!reg.test(value)) {
                 validator.addViolation(constraint.message, value, {
@@ -225,6 +237,10 @@ var simpleThingsFormExtraValidator = {
             return true;
         },
         url: function (value, constraint, validator) {
+            if (null == value || '' == value) {
+                return true;
+            }
+
             var reg = /(?:https?:\/\/(?:(?:(?:(?:(?:[a-zA-Z\d](?:(?:[a-zA-Z\d]|-)*[a-zA-Z\d])?)\.)*(?:[a-zA-Z](?:(?:[a-zA-Z\d]|-)*[a-zA-Z\d])?))|(?:(?:\d+)(?:\.(?:\d+)){3}))(?::(?:\d+))?)(?:\/(?:(?:(?:(?:[a-zA-Z\d$\-_.+!*'(),]|(?:%[a-fA-F\d]{2}))|[;:@&=])*)(?:\/(?:(?:(?:[a-zA-Z\d$\-_.+!*'(),]|(?:%[a-fA-F\d]{2}))|[;:@&=])*))*)(?:\?(?:(?:(?:[a-zA-Z\d$\-_.+!*'(),]|(?:%[a-fA-F\d]{2}))|[;:@&=])*))?)?)/;
             if(!reg.test(value)) {
                 validator.addViolation(constraint.message, value, {
@@ -236,7 +252,6 @@ var simpleThingsFormExtraValidator = {
             return true;
         },
         type: function (value, constraint, validator) {
-
             if (null == value || '' == value) {
                 return true;
             }
