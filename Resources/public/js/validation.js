@@ -214,7 +214,7 @@ var simpleThingsFormExtraValidator = {
             return true;
         },
         time: function (value, constraint, validator) {
-            var reg = /^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/;
+            var reg = /^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])(:([0-5][0-9]))?$/;
             if(!reg.test(value)) {
                 validator.addViolation(constraint.message, value, {
                     '{{ value }}': value
