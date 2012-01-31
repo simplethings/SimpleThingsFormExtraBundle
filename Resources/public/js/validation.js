@@ -40,7 +40,7 @@ var simpleThingsFormExtraValidator = {
 
     constraints: {
         max: function (value, constraint, validator) {
-            if (isNaN(value)) {
+            if (isNaN(value.replace(/,/, "."))) {
                 validator.addViolation(constraint.invalidMessage, value, {
                     '{{ limit }}': constraint.limit,
                     '{{ value }}': value
@@ -59,7 +59,7 @@ var simpleThingsFormExtraValidator = {
             return true;
         },
         min: function (value, constraint, validator) {
-            if (isNaN(value)) {
+            if (isNaN(value.replace(/,/, "."))) {
                 validator.addViolation(constraint.invalidMessage, value, {
                     '{{ limit }}': constraint.limit,
                     '{{ value }}': value
@@ -177,7 +177,7 @@ var simpleThingsFormExtraValidator = {
             return true;
         },
         size: function (value, constraint, validator) {
-            if (isNaN(value)) {
+            if (isNaN(value.replace(/,/, "."))) {
                 validator.addViolation(constraint.invalidMessage, value, {
                     '{{ value }}': value
                 });
@@ -265,7 +265,7 @@ var simpleThingsFormExtraValidator = {
                     }
                     break;
                 case 'numeric':
-                    if(isNaN(value) == false) {
+                    if(isNaN(value.replace(/,/, ".")) == false) {
                         return true;
                     }
                     break;
