@@ -32,7 +32,7 @@ class ErrorAttrTypeExtension extends AbstractTypeExtension
         if($errors) {
             $attr = $view->get('attr');
             if(!isset($attr['data-error'])) {
-                $attr['data-error'] = implode('\r\n', $errors);
+                $attr['data-error'] = implode("<br>", $errors);
                 $view->set('attr', $attr);
             }
         }
