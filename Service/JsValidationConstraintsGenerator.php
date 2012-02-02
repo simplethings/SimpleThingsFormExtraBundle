@@ -4,6 +4,7 @@ namespace SimpleThings\FormExtraBundle\Service;
 
 use Symfony\Component\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Translation\Translator;
 
 /**
  * @author david badura <badura@simplethings.de>
@@ -13,22 +14,36 @@ class JsValidationConstraintsGenerator
 
     /**
      *
-     * @var ValidatorInterface 
+     * @var ValidatorInterface
      */
     protected $validator;
 
     /**
      *
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
+     *
+     * @var string
+     */
+    protected $defaultLocale;
+
+    /**
+     *
      * @param ValidatorInterface $validator
      */
-    public function __construct(ValidatorInterface $validator)
+    public function __construct(ValidatorInterface $validator, Translator $translator, $defaultLocale)
     {
         $this->validator = $validator;
+        $this->translator = $translator;
+        $this->defaultLocale = $defaultLocale;
     }
 
     /**
-     * 
-     * @param array $objects 
+     *
+     * @param array $objects
      * @return string
      */
     public function generate(array $objects)
@@ -48,7 +63,9 @@ class JsValidationConstraintsGenerator
                 $constraintsList = $metadata->getMemberMetadatas($property);
                 foreach ($constraintsList as $constraints) {
                     foreach ($constraints->constraints as $constraint) {
-                        $data[$object][$property][$this->getConstraintName($constraint)] = $constraint;
+                        $const = clone $constraint;
+                        $const->message = $this->translator->trans($const->message, array(), 'validators', $this->defaultLocale);
+                        $data[$object][$property][$this->getConstraintName($const)] = $const;
                     }
                 }
             }
@@ -60,7 +77,7 @@ class JsValidationConstraintsGenerator
     /**
      *
      * @param Constraint $constraint
-     * @return string 
+     * @return string
      */
     protected function getConstraintName(Constraint $constraint)
     {

@@ -40,6 +40,7 @@
 
         <service id="simple_things_form_extra.form.extension.error_attr" class="%simple_things_form_extra.form.extension.error_attr.class%">
             <tag name="form.type_extension" alias="field" />
+            <argument type="service" id="translator" />
         </service>
 
         <service id="simple_things_form_extra.twig.extension.validation" class="%simple_things_form_extra.twig.extension.validation.class%">
@@ -50,6 +51,8 @@
 
         <service id="simple_things_form_extra.js_validation_constraints_generator" class="%simple_things_form_extra.js_validation_constraints_generator.class%">
             <argument type="service" id="validator" />
+            <argument type="service" id="translator" />
+            <argument>%kernel.default_locale%</argument>
         </service>
 
     </services>

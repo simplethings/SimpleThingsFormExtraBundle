@@ -5,6 +5,7 @@ namespace SimpleThings\FormExtraBundle\Form\Extension;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Translation\Translator;
 
 /**
  *
@@ -12,6 +13,13 @@ use Symfony\Component\Form\FormView;
  */
 class ErrorAttrTypeExtension extends AbstractTypeExtension
 {
+
+    protected $translator;
+
+    public function __construct(Translator $translator)
+    {
+        $this->translator = $translator;
+    }
 
     /**
      * @return string
@@ -26,7 +34,7 @@ class ErrorAttrTypeExtension extends AbstractTypeExtension
         $errors = array();
         $fieldErrors = $form->getErrors();
         foreach ($fieldErrors as $fieldError) {
-            $errors[] = $fieldError->getMessage();
+            $errors[] = $this->translator->trans($fieldError->getMessageTemplate(), $fieldError->getMessageParameters(), 'validators');
         }
 
         if($errors) {
