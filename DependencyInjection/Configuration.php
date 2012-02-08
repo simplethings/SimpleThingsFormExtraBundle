@@ -21,6 +21,8 @@ class Configuration implements ConfigurationInterface
                         ->end()
                    ->end()
                 ->end()
+                ->booleanNode('translation_domain_forward_compat')->defaultFalse()->end()
+                ->booleanNode('help_extension')->defaultFalse()->end()
                 ->arrayNode('recaptcha')
                     ->canBeUnset()
                     ->children()

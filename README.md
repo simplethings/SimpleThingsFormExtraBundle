@@ -85,6 +85,21 @@ parameters:
     simple_things_form_extra.service.recaptcha.class: SimpleThings\FormExtraBundle\FunctionalTest\Recaptcha
 ```
 
+The `formextra_recaptcha` form type takes a `widget_options` setting which is encoded as json and set to the configuration
+javascript variable Recaptcha needs. This allows you to change the theme for the widget or roll your own. For more information
+about what is possible check here http://code.google.com/apis/recaptcha/docs/customization.html.
+
+``` php
+<?php
+// ...
+$builder->add('recaptcha', 'formextra_recaptcha', array(
+    'widget_options' => array(
+        'theme' => 'white', // blackglass, clean, red is the predefined themes.
+    ),
+));
+// ...
+```
+
 ## PlainType
 
 Sometimes it is needed to show the value of a field without having it be an input box. This is where
@@ -150,20 +165,69 @@ method to generate a route with parameters "id" and "file", to delete the listed
 passed is not enough you should overwrite the twig template with your own logic to implement
 deleting.
 
-### FieldTypeExtension
+### TranslationDomainExtension
 
-A Field Extension contains method called by FormBuilder or createView. These applies to all fields
-specified in the dic tag alias.
+This field extension provides the forward compatibility for the support of translation domains
+added in Symfony 2.1. So activating it is useful only when using Symfony 2.0 (activating it in
+Symfony 2.1 will add useless overhead)
 
-This example will preset the class attribute on the rendered textarea html element.
+To use it, you need to activate it and to register the form theme using the translation domain.
+
+``` yaml
+# app/config/config.yml
+simple_things_form_extra:
+    translation_domain_forward_campat: true
+
+twig:
+    form:
+        resources:
+            - SimpleThingsFormExtraBundle:Form:translation_domain.html.twig
+            # eventually other themes here
+```
+
+You can now provide the translation domain used for labels and choice options when building the form:
 
 ``` php
 <?php
 // ...
 $builder->add('body', 'textarea', array(
-    'attr' => array(
-        'class' => 'niceditor',
-    )
+    'label' => 'some message',
+    'translation_domain' => 'form_extra',
+));
+// ...
+```
+
+### HelpExtension
+
+This field extension provides help message option.
+
+To use it, you need to activate it and to register the form theme using the translation domain.
+
+``` yaml
+# app/config/config.yml
+simple_things_form_extra:
+    help_extension: true
+
+twig:
+    form:
+        resources:
+            - SimpleThingsFormExtraBundle:Form:field_type_help.html.twig
+```
+
+You can also load the help extension form theme into your own form theme.
+
+```
+{% use 'SimpleThingsFormExtraBundle:Form:field_type_help.html.twig' %}
+```
+
+You can now provide the help message for field when building the form:
+
+``` php
+<?php
+// ...
+$builder->add('body', 'textarea', array(
+    'label' => 'some message',
+    'help'  => 'some usefull help message'
 ));
 // ...
 ```

@@ -8,12 +8,12 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormBuilder;
 
 /**
- * Generic extension for fields that allows any attr to be set when building
- * the form.
+ * Extension providing forward compatibility for the handling of translation
+ * domains introduced in Symfony 2.0
  *
- * @author Henrik Bjornskov <henrik@bjrnskov.dk>
+ * @author Christophe Coevoet <stof@notk.org>
  */
-class FieldTypeExtension extends AbstractTypeExtension
+class TranslationDomainExtension extends AbstractTypeExtension
 {
     /**
      * @return string
@@ -22,14 +22,14 @@ class FieldTypeExtension extends AbstractTypeExtension
     {
         return 'field';
     }
-    
+
     /**
      * @param FormBuilder $builder
      * @param array $options
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder->setAttribute('attr', $options['attr']);
+        $builder->setAttribute('translation_domain', $options['translation_domain']);
     }
 
     /**
@@ -38,7 +38,7 @@ class FieldTypeExtension extends AbstractTypeExtension
      */
     public function buildView(FormView $view, FormInterface $form)
     {
-        $view->set('attr', $form->getAttribute('attr'));
+        $view->set('translation_domain', $form->getAttribute('translation_domain'));
     }
 
     /**
@@ -48,7 +48,7 @@ class FieldTypeExtension extends AbstractTypeExtension
     public function getDefaultOptions(array $options)
     {
         return array(
-            'attr' => array(),
+            'translation_domain' => 'messages',
         );
     }
 }
