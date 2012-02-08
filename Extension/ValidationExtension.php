@@ -1,20 +1,28 @@
 <?php
+/**
+ * SimpleThings FormExtraBundle
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to kontakt@beberlei.de so I can send you a copy immediately.
+ */
 
 namespace SimpleThings\FormExtraBundle\Extension;
 
 use SimpleThings\FormExtraBundle\Service\JsValidationConstraintsGenerator;
 
-
 /**
- *
  * @author David Badura <badura@simplethings.de>
  */
 class ValidationExtension extends \Twig_Extension
 {
-    
     /**
      *
-     * @var JsValidationConstraintsGenerator 
+     * @var JsValidationConstraintsGenerator
      */
     private $generator;
 
@@ -23,11 +31,11 @@ class ValidationExtension extends \Twig_Extension
      * @var array
      */
     private $objects;
-    
+
     /**
      *
      * @param ValidatorInterface $validator
-     * @param array $objects 
+     * @param array $objects
      */
     public function __construct(JsValidationConstraintsGenerator $generator, array $objects)
     {
@@ -48,12 +56,14 @@ class ValidationExtension extends \Twig_Extension
     }
 
     /**
+     * Generates a JSON representation of the validation constraints that are
+     * exported to the client-side.
      *
      * @return string
      */
     public function getValidationConstraints()
     {
-        return $this->generator->generate($this->objects);        
+        return $this->generator->generate($this->objects);
     }
 
     /**
