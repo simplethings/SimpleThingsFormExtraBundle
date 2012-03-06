@@ -260,7 +260,7 @@ var simpleThingsFormExtraValidator = {
                 case 'int':
                 case 'integer':
                 case 'digit':
-                    if(isNaN(value) == false && parseInt(value) == value) {
+                    if(value.indexOf('.') == -1 && isNaN(value) == false && parseInt(value) == value) {
                         return true;
                     }
                     break;
