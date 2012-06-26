@@ -46,6 +46,7 @@ $ git submodule add git://github.com/SimpleThings/SimpleThingsFormExtraBundle.gi
 [FormExtraBundle]
     git=https://github.com/simplethings/SimpleThingsFormExtraBundle.git
     target=bundles/SimpleThings/FormExtraBundle
+```
 
 
 the enable to the bundle inside your kernel class normally called `AppKernel.php`
