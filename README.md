@@ -42,6 +42,12 @@ $ git clone git://github.com/SimpleThings/SimpleThingsFormExtraBundle.git vendor
 $ git submodule add git://github.com/SimpleThings/SimpleThingsFormExtraBundle.git vendor/bundles/SimpleThings/FormExtraBundle
 ```
 
+``` deps
+[FormExtraBundle]
+    git=https://github.com/simplethings/SimpleThingsFormExtraBundle.git
+    target=bundles/SimpleThings/FormExtraBundle
+
+
 the enable to the bundle inside your kernel class normally called `AppKernel.php`
 
 ``` php
@@ -176,7 +182,7 @@ To use it, you need to activate it and to register the form theme using the tran
 ``` yaml
 # app/config/config.yml
 simple_things_form_extra:
-    translation_domain_forward_campat: true
+    translation_domain_forward_compat: true
 
 twig:
     form:
