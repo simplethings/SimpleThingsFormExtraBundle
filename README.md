@@ -42,6 +42,8 @@ $ git clone git://github.com/SimpleThings/SimpleThingsFormExtraBundle.git vendor
 $ git submodule add git://github.com/SimpleThings/SimpleThingsFormExtraBundle.git vendor/bundles/SimpleThings/FormExtraBundle
 ```
 
+or use the deps file by adding this in it and running php bin/vendors install
+
 ``` deps
 [FormExtraBundle]
     git=https://github.com/simplethings/SimpleThingsFormExtraBundle.git
