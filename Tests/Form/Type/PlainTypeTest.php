@@ -10,7 +10,6 @@ class PlainTypeTest extends \PHPUnit_Framework_TestCase
     {
         $type = new PlainType();
         $this->assertEquals(array(
-            'property_path' => false,
             'read_only'     => true,
         ), $type->getDefaultOptions(array()));
     }
