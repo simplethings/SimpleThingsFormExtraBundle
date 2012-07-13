@@ -15,15 +15,15 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
         $this->type = new ImageType();
         $this->dispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
         $this->factory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
-        $this->builder = new FormBuilder('name', $this->factory, $this->dispatcher);
+        $this->builder = new FormBuilder('name', 'Symfony\Component\HttpFoundation\File\File', $this->dispatcher, $this->factory);
     }
-    
+
     public function testNameAndParent()
     {
         $this->assertEquals('formextra_image', $this->type->getName());
         $this->assertEquals('file', $this->type->getParent(array()));
     }
-    
+
     public function testDefaultOptions()
     {
         $this->assertEquals(array(
@@ -36,7 +36,7 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
             'type'                      => 'file',
         ), $this->type->getDefaultOptions(array()));
     }
-    
+
     public function testBuildForm()
     {
         $options = array(
@@ -47,7 +47,7 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
             'image_width'               => false,
             'image_height'              => false,
         );
-        
+
         $this->type->buildForm($this->builder, $options);
 
         $this->assertTrue($this->builder->hasAttribute('base_path'));
@@ -60,7 +60,7 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildView()
     {
-        $view = new FormView();
+        $view = new FormView('name');
 
         $options = array(
             'base_path'                 => __DIR__,
@@ -70,13 +70,13 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
             'image_width'               => false,
             'image_height'              => false,
         );
-        
+
         $this->type->buildForm($this->builder, $options);
 
         $form = $this->builder->getForm();
         $form->setData(new File(__FILE__));
-        $this->type->buildView($view, $form);
+        $this->type->buildView($view, $form, array());
 
-        $this->assertEquals('http://example.com/ImageTypeTest.php', $view->get('image_uri'));
+        $this->assertEquals('http://example.com/ImageTypeTest.php', $view->getVar('image_uri'));
     }
 }
