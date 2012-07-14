@@ -15,22 +15,23 @@ namespace SimpleThings\FormExtraBundle\Form\EventListener;
 
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\Exception\FormException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\DecoderInterface;
 
 use SimpleThings\FormExtraBundle\Serializer\EncoderRegistry;
 use SimpleThings\FormExtraBundle\Serializer\NamingStrategy\CamelCaseStrategy;
+use SimpleThings\FormExtraBundle\Serializer\NamingStrategy\NamingStrategy;
 
 class BindRequestListener implements EventSubscriberInterface
 {
-    private $encoderRegistry;
+    private $decoder;
     private $namingStrategy;
 
-    public function __construct(EncoderRegistry $encoderRegistry)
+    public function __construct(DecoderInterface $decoder, NamingStrategy $namingStrategy = null)
     {
-        $this->encoderRegistry = $encoderRegistry;
-        $this->namingStrategy  = new CamelCaseStrategy();
+        $this->decoder        = $decoder;
+        $this->namingStrategy = $namingStrategy ?: new CamelCaseStrategy();
     }
 
     public static function getSubscribedEvents()
@@ -50,14 +51,12 @@ class BindRequestListener implements EventSubscriberInterface
 
         $format = $request->getContentType();
 
-        if ( ! $this->encoderRegistry->supportsEncoding($format)) {
+        if ( ! $this->decoder->supportsDecoding($format)) {
             return;
         }
 
         $content = $request->getContent();
-        $data    = $this->encoderRegistry
-                        ->getEncoder($format)
-                        ->decode($content, $format);
+        $data    = $this->decoder->decode($content, $format);
 
         $event->setData($this->unserializeForm($data, $form));
     }

@@ -13,13 +13,27 @@
 
 namespace SimpleThings\FormExtraBundle\Serializer;
 
-class EncoderRegistry
+use Symfony\Component\Serializer\Encoder\EncoderInterface;
+use Symfony\Component\Serializer\Encoder\DecoderInterface;
+
+class EncoderRegistry implements EncoderInterface, DecoderInterface
 {
     private $encoders = array();
 
     public function __construct(array $encoders)
     {
         $this->encoders = $encoders;
+    }
+
+    public function supportsDecoding($format)
+    {
+        foreach ($this->encoders as $encoder) {
+            if ($encoder->supportsDecoding($format)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function supportsEncoding($format)
@@ -31,6 +45,18 @@ class EncoderRegistry
         }
 
         return false;
+    }
+
+    public function decode($data, $format)
+    {
+        $encoder = $this->getEncoder($format);
+        return $encoder->decode($data, $format);
+    }
+
+    public function encode($data, $format)
+    {
+        $encoder = $this->getEncoder($format);
+        return $encoder->encode($data, $format);
     }
 
     public function getEncoder($format)

@@ -16,20 +16,22 @@ namespace SimpleThings\FormExtraBundle\Serializer;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\TypeInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Serializer\Encoder\EncoderInterface;
 
 use SimpleThings\FormExtraBundle\Serializer\NamingStrategy\CamelCaseStrategy;
+use SimpleThings\FormExtraBundle\Serializer\NamingStrategy\NamingStrategy;
 
 class FormSerializer
 {
     private $factory;
-    private $encoderRegistry;
+    private $encoder;
     private $namingStrategy;
 
-    public function __construct(FormFactoryInterface $factory, EncoderRegistry $encoderRegistry)
+    public function __construct(FormFactoryInterface $factory, EncoderInterface $encoder, NamingStrategy $namingStrategy = null)
     {
-        $this->factory         = $factory;
-        $this->encoderRegistry = $encoderRegistry;
-        $this->namingStrategy  = new CamelCaseStrategy();
+        $this->factory        = $factory;
+        $this->encoder        = $encoder;
+        $this->namingStrategy = $namingStrategy ?: new CamelCaseStrategy();
     }
 
     public function serialize($object, $typeBuilder, $format)
@@ -50,10 +52,9 @@ class FormSerializer
 
         $data = $this->serializeForm($form, $format == 'xml');
 
-        $this->encoderRegistry->getEncoder('xml')->setRootNodeName($xmlName);
+        $this->encoder->getEncoder('xml')->setRootNodeName($xmlName);
 
-        return $this->encoderRegistry
-                    ->getEncoder($format)
+        return $this->encoder
                     ->encode($data, $format);
     }
 
