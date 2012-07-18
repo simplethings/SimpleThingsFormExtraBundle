@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormViewInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Extends the File type, upload an image but show a version of the currently uploaded image.
@@ -71,14 +72,11 @@ class ImageType extends AbstractType
     }
 
     /**
-     * Options for this type
-     *
-     * @param  array $options
-     * @return array
+     * {@inheritdoc}
      */
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'base_path'                 => false,
             'base_uri'                  => false,
             'no_image_placeholder_uri'  => '',
@@ -86,7 +84,7 @@ class ImageType extends AbstractType
             'image_width'               => false,
             'image_height'              => false,
             'type'                      => 'file',
-        );
+        ));
     }
 
     /**
