@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormViewInterface;
 use Symfony\Component\Form\Exception\FormException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use SimpleThings\FormExtraBundle\Service\Recaptcha;
 use SimpleThings\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
@@ -90,18 +91,15 @@ class RecaptchaType extends AbstractType
     }
 
     /**
-     * Options for this type
-     *
-     * @param  array $options
-     * @return array
+     * {@inheritdoc}
      */
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'required'        => true,
             'property_path'   => false,
             'widget_options'  => array(),
-        );
+        ));
     }
 
     /**
