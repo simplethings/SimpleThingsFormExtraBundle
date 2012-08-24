@@ -2,11 +2,12 @@
 
 namespace SimpleThings\FormExtraBundle\Tests\Form\Type;
 
-use Symfony\Component\HttpFoundation\Request;
+use SimpleThings\FormExtraBundle\Form\Type\ImageType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\File\File;
-use SimpleThings\FormExtraBundle\Form\Type\ImageType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,6 +17,7 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
         $this->dispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
         $this->factory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $this->builder = new FormBuilder('name', 'Symfony\Component\HttpFoundation\File\File', $this->dispatcher, $this->factory);
+        $this->resolver = new OptionsResolver();
     }
 
     public function testNameAndParent()
@@ -26,6 +28,8 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultOptions()
     {
+        $this->type->setDefaultOptions($this->resolver);
+
         $this->assertEquals(array(
             'base_path'                 => false,
             'base_uri'                  => false,
@@ -34,7 +38,7 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
             'image_width'               => false,
             'image_height'              => false,
             'type'                      => 'file',
-        ), $this->type->getDefaultOptions(array()));
+        ), $this->resolver->resolve(array()));
     }
 
     public function testBuildForm()
@@ -60,7 +64,7 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildView()
     {
-        $view = new FormView('name');
+        $view = new FormView();
 
         $options = array(
             'base_path'                 => __DIR__,
@@ -77,6 +81,6 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
         $form->setData(new File(__FILE__));
         $this->type->buildView($view, $form, array());
 
-        $this->assertEquals('http://example.com/ImageTypeTest.php', $view->getVar('image_uri'));
+        $this->assertEquals('http://example.com/ImageTypeTest.php', $view->vars['image_uri']);
     }
 }

@@ -5,6 +5,7 @@ namespace SimpleThings\FormExtraBundle\Tests\Form\Type;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use SimpleThings\FormExtraBundle\Form\Type\RecaptchaType;
 use SimpleThings\FormExtraBundle\Service\Recaptcha;
 
@@ -23,6 +24,7 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
         $this->dispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
         $this->factory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $this->builder = new FormBuilder('name', null, $this->dispatcher, $this->factory);
+        $this->resolver = new OptionsResolver();
     }
 
     public function testNameAndParent()
@@ -33,11 +35,13 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultOptions()
     {
+        $this->type->setDefaultOptions($this->resolver);
+
         $this->assertEquals(array(
             'property_path' => false,
             'required' => true,
             'widget_options' => array(),
-        ), $this->type->getDefaultOptions(array()));
+        ), $this->resolver->resolve(array()));
     }
 
     public function testBuildForm()
@@ -62,7 +66,7 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildView()
     {
-        $view = new FormView('name');
+        $view = new FormView();
 
         $this->builder->setAttribute('widget_options', array(
             'theme' => 'white',
@@ -70,9 +74,9 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
 
         $this->type->buildView($view, $this->builder->getForm(), array());
 
-        $this->assertEquals('publicKey', $view->getVar('public_key'));
+        $this->assertEquals('publicKey', $view->vars['public_key']);
         $this->assertEquals(array(
             'theme' => 'white',
-        ), $view->getVar('widget_options'));
+        ), $view->vars['widget_options']);
     }
 }
