@@ -12,9 +12,10 @@
         "name" : "Henrik Bjørnskov",
         "email" : "henrik@bjrnskov.dk"
     }],
+    "minimum-stability" : "dev",
     "require": {
         "php": ">=5.3.0",
-        "symfony/symfony" : ">=2.0"
+        "symfony/symfony" : "<2.2-dev"
     },
     "autoload": {
         "psr-0": {
