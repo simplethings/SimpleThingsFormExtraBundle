@@ -3,7 +3,7 @@
 namespace SimpleThings\FormExtraBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -20,14 +20,14 @@ use SimpleThings\FormExtraBundle\Form\DataTransformer\FileSetTransformer;
  */
 class FileSetType extends AbstractType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->prependNormTransformer(new FileSetTransformer());
         $builder->setAttribute('delete_route', $options['delete_route']);
         $builder->setAttribute('delete_id', $options['delete_id']);
     }
 
-    public function buildView(FormView $view, FormInterface $form)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $data = $form->getData();
         if ($data === null) {
@@ -68,7 +68,7 @@ class FileSetType extends AbstractType
         return 'formextra_fileset';
     }
 
-    public function getParent(array $options)
+    public function getParent()
     {
         return 'file';
     }

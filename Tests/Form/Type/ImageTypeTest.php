@@ -60,7 +60,7 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildView()
     {
-        $view = new FormView('name');
+        $view = new FormView();
 
         $options = array(
             'base_path'                 => __DIR__,
@@ -77,6 +77,6 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
         $form->setData(new File(__FILE__));
         $this->type->buildView($view, $form, array());
 
-        $this->assertEquals('http://example.com/ImageTypeTest.php', $view->getVar('image_uri'));
+        $this->assertEquals('http://example.com/ImageTypeTest.php', $view->vars['image_uri']);
     }
 }

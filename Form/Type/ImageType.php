@@ -5,7 +5,7 @@ namespace SimpleThings\FormExtraBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormViewInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * Extends the File type, upload an image but show a version of the currently uploaded image.
@@ -25,7 +25,7 @@ class ImageType extends AbstractType
      * Configures the Type
      *
      * @param FormBuilderInterface $builder
-     * @param array       $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -47,10 +47,10 @@ class ImageType extends AbstractType
     /**
      * Sets attributes for use with the renderer
      *
-     * @param FormViewInterface $view
+     * @param FormView      $view
      * @param FormInterface $form
      */
-    public function buildView(FormViewInterface $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $data = $form->getData();
 
@@ -60,20 +60,21 @@ class ImageType extends AbstractType
             if ('/' !== DIRECTORY_SEPARATOR) {
                 $uri = str_replace(DIRECTORY_SEPARATOR, '/', $uri);
             }
-            $view->setVar('image_uri', $uri);
+            $view->vars['image_uri'] = $uri;
         } else if ($form->hasAttribute ('no_image_placeholder_uri') && $uri = $form->getAttribute ('no_image_placeholder_uri')) {
             $view->setAttribute('image_uri', $uri);
         }
 
-        $view->setVar('image_alt', $form->getAttribute('image_alt'));
-        $view->setVar('image_height', $form->getAttribute('image_height'));
-        $view->setVar('image_width', $form->getAttribute('image_width'));
+        $view->vars['image_alt'] = $form->getAttribute('image_alt');
+        $view->vars['image_height'] = $form->getAttribute('image_height');
+        $view->vars['image_width'] = $form->getAttribute('image_width');
     }
 
     /**
      * Options for this type
      *
      * @param  array $options
+     *
      * @return array
      */
     public function getDefaultOptions(array $options)
@@ -93,6 +94,7 @@ class ImageType extends AbstractType
      * Inherits from file type and adds displaying capabilities.
      *
      * @param array $options
+     *
      * @return string
      */
     public function getParent()
