@@ -5,7 +5,7 @@ namespace SimpleThings\FormExtraBundle\Form\Extension;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Extension providing forward compatibility for the handling of translation
@@ -24,28 +24,30 @@ class TranslationDomainExtension extends AbstractTypeExtension
     }
 
     /**
-     * @param FormBuilder $builder
-     * @param array $options
+     * @param FormBuilderInterface $builder
+     * @param array                $options
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->setAttribute('translation_domain', $options['translation_domain']);
     }
 
     /**
-     * @param FormView $view
+     * @param FormView      $view
      * @param FormInterface $form
+     * @param array         $options
      */
-    public function buildView(FormView $view, FormInterface $form)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->set('translation_domain', $form->getAttribute('translation_domain'));
     }
 
     /**
      * @param array $options
+     *
      * @return array
      */
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
         return array(
             'translation_domain' => 'messages',
