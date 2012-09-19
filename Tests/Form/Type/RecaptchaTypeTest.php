@@ -62,7 +62,7 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildView()
     {
-        $view = new FormView('name');
+        $view = new FormView();
 
         $this->builder->setAttribute('widget_options', array(
             'theme' => 'white',
@@ -70,9 +70,9 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
 
         $this->type->buildView($view, $this->builder->getForm(), array());
 
-        $this->assertEquals('publicKey', $view->getVar('public_key'));
+        $this->assertEquals('publicKey', $view->vars['public_key']);
         $this->assertEquals(array(
             'theme' => 'white',
-        ), $view->getVar('widget_options'));
+        ), $view->vars['widget_options']);
     }
 }
