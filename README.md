@@ -42,14 +42,24 @@ $ git clone git://github.com/SimpleThings/SimpleThingsFormExtraBundle.git vendor
 $ git submodule add git://github.com/SimpleThings/SimpleThingsFormExtraBundle.git vendor/bundles/SimpleThings/FormExtraBundle
 ```
 
-or use the deps file by adding this in it and running php bin/vendors install
+for symfony 2.0 use the deps file by adding this in it and running php bin/vendors install
 
-``` deps
+``` ini
 [FormExtraBundle]
     git=https://github.com/simplethings/SimpleThingsFormExtraBundle.git
     target=bundles/SimpleThings/FormExtraBundle
+    version=v0.1
 ```
 
+or for symfony 2.1 add this to your composer.json and run composer install
+
+``` json
+{
+    "require": {
+        "simplethings/form-extra-bundle": "*"
+    }
+}
+```
 
 the enable to the bundle inside your kernel class normally called `AppKernel.php`
 
