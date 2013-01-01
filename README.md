@@ -56,7 +56,7 @@ or for symfony 2.1 add this to your composer.json and run composer install
 ``` json
 {
     "require": {
-        "simplethings/form-extra-bundle": "*"
+        "simplethings/form-extra-bundle": "dev-master"
     }
 }
 ```
