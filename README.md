@@ -35,11 +35,11 @@ Fire up a terminal and either clone this repository or add it as a submodule bot
 by example.
 
 ``` shell
-$ git clone git://github.com/SimpleThings/SimpleThingsFormExtraBundle.git vendor/bundles/SimpleThings/FormExtraBundle
+$ git clone git://github.com/simplethings/SimpleThingsFormExtraBundle.git vendor/bundles/SimpleThings/FormExtraBundle
 ```
 
 ``` shell
-$ git submodule add git://github.com/SimpleThings/SimpleThingsFormExtraBundle.git vendor/bundles/SimpleThings/FormExtraBundle
+$ git submodule add git://github.com/simplethings/SimpleThingsFormExtraBundle.git vendor/bundles/SimpleThings/FormExtraBundle
 ```
 
 for symfony 2.0 use the deps file by adding this in it and running php bin/vendors install
