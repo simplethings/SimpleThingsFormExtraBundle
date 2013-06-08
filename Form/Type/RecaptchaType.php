@@ -27,6 +27,7 @@ use SimpleThings\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
  *
  *
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
+ * @author Jeffrey Boehm <post@jeffrey-boehm.de>
  */
 class RecaptchaType extends AbstractType
 {
@@ -68,10 +69,10 @@ class RecaptchaType extends AbstractType
                 'data' => 'manual_challenge',
             ));
 
-        $builder->prependClientTransformer(new RecaptchaTransformer($this->recaptcha));
+        $builder->addViewTransformer(new RecaptchaTransformer($this->recaptcha), true);
 
         $builder
-            ->setAttribute('widget_options', $options['widget_options']);
+            ->setAttribute('widget_options', $options['attr']);
     }
 
     /**
@@ -84,7 +85,7 @@ class RecaptchaType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['public_key'] = $this->publicKey;
-        $view->vars['widget_options'] = $form->getAttribute('widget_options');
+        $view->vars['widget_options'] = $form->getConfig()->getAttribute('widget_options');
     }
 
     /**

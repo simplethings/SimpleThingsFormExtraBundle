@@ -112,7 +112,7 @@ about what is possible check here http://code.google.com/apis/recaptcha/docs/cus
 <?php
 // ...
 $builder->add('recaptcha', 'formextra_recaptcha', array(
-    'widget_options' => array(
+    'attr' => array(
         'theme' => 'white', // blackglass, clean, red is the predefined themes.
     ),
 ));
