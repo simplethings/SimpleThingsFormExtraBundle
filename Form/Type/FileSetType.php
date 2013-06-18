@@ -22,9 +22,7 @@ class FileSetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->prependNormTransformer(new FileSetTransformer());
-        $builder->setAttribute('delete_route', $options['delete_route']);
-        $builder->setAttribute('delete_id', $options['delete_id']);
+        $builder->addModelTransformer(new FileSetTransformer());
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
