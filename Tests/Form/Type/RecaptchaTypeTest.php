@@ -43,7 +43,7 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
     public function testBuildForm()
     {
         $this->type->buildForm($this->builder, array(
-            'widget_options' => array(
+            'attr' => array(
                 'theme' => 'white'
             ),
         ));
@@ -55,7 +55,7 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->builder->has('recaptcha_challenge_field'));
         $this->assertTrue($this->builder->has('recaptcha_response_field'));
         
-        $transformers = $this->builder->getClientTransformers();
+        $transformers = $this->builder->getViewTransformers();
         $this->assertEquals(1, count($transformers));
         $this->assertInstanceOf('SimpleThings\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer', $transformers[0]);
     }
