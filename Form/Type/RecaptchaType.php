@@ -72,7 +72,7 @@ class RecaptchaType extends AbstractType
         $builder->addViewTransformer(new RecaptchaTransformer($this->recaptcha), true);
 
         $builder
-            ->setAttribute('widget_options', $options['attr']);
+            ->setAttribute('widget_options', $options['widget_options']);
     }
 
     /**

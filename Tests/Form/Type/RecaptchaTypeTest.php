@@ -43,7 +43,7 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
     public function testBuildForm()
     {
         $this->type->buildForm($this->builder, array(
-            'attr' => array(
+            'widget_options' => array(
                 'theme' => 'white'
             ),
         ));
