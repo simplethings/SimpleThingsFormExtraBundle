@@ -69,7 +69,7 @@ class RecaptchaType extends AbstractType
                 'data' => 'manual_challenge',
             ));
 
-        $builder->addViewTransformer(new RecaptchaTransformer($this->recaptcha), true);
+        $builder->addViewTransformer(new RecaptchaTransformer($this->recaptcha));
 
         $builder
             ->setAttribute('widget_options', $options['widget_options']);
