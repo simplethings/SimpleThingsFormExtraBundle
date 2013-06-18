@@ -3,14 +3,15 @@
 namespace SimpleThings\FormExtraBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\Exception\FormException;
 use Symfony\Component\HttpFoundation\Request;
 
 use SimpleThings\FormExtraBundle\Service\Recaptcha;
 use SimpleThings\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * A ReCaptcha type for use with Google ReCatpcha services. It embeds two fields that are used
@@ -60,7 +61,7 @@ class RecaptchaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ((string) $this->publicKey === '') {
-            throw new FormException('A public key must be set and not empty.');
+            throw new InvalidConfigurationException('A public key must be set and not empty.');
         }
 
         $builder
@@ -70,9 +71,6 @@ class RecaptchaType extends AbstractType
             ));
 
         $builder->addViewTransformer(new RecaptchaTransformer($this->recaptcha));
-
-        $builder
-            ->setAttribute('widget_options', $options['widget_options']);
     }
 
     /**
@@ -85,7 +83,7 @@ class RecaptchaType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['public_key'] = $this->publicKey;
-        $view->vars['widget_options'] = $form->getConfig()->getAttribute('widget_options');
+        $view->vars['widget_options'] = $options['widget_options'];
     }
 
     /**
@@ -95,13 +93,13 @@ class RecaptchaType extends AbstractType
      *
      * @return array
      */
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'required'        => true,
             'property_path'   => false,
             'widget_options'  => array(),
-        );
+        ));
     }
 
     /**
