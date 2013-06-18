@@ -48,9 +48,9 @@ class FileSetType extends AbstractType
                 throw new UnexpectedTypeException($file, 'string');
             }
         }
-        $view->set('files', $files);
-        $view->set('delete_route', $form->getAttribute('delete_route'));
-        $view->set('delete_id', $form->getAttribute('delete_id'));
+        $view->vars['files'] = $files;
+        $view->vars['delete_route'] = $options['delete_route'];
+        $view->vars['delete_id'] = $options['delete_id'];
     }
 
     public function getDefaultOptions(array $options)
