@@ -3,14 +3,22 @@
 namespace SimpleThings\FormExtraBundle\Tests\Form\Type;
 
 use SimpleThings\FormExtraBundle\Form\Type\PlainType;
+use Symfony\Component\Form\Test\TypeTestCase;
 
-class PlainTypeTest extends \PHPUnit_Framework_TestCase
+class PlainTypeTest extends TypeTestCase
 {
     public function testDefaultOptions()
     {
-        $type = new PlainType();
-        $this->assertEquals(array(
-            'read_only'     => true,
-        ), $type->getDefaultOptions(array()));
+        $data = 'test';
+
+        $form = $this->factory->create(new PlainType(), null, array());
+
+        $form->setData($data);
+
+        $this->assertTrue($form->isSynchronized());
+        //$this->assertEquals($object, $form->getData());
+
+        $view = $form->createView();
+        $this->assertEquals(true, $view->vars['read_only']);
     }
 }
