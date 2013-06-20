@@ -40,7 +40,7 @@ class ImageFormTypeTest extends TypeTestCase
         $form->setData($file);
 
         $this->assertTrue($form->isSynchronized());
-        //$this->assertEquals($object, $form->getData());
+        $this->assertEquals($file, $form->getData());
 
         $view = $form->createView();
         $this->assertEquals('', $view->vars['image_alt']);
@@ -63,7 +63,7 @@ class ImageFormTypeTest extends TypeTestCase
         $form->setData($file);
 
         $this->assertTrue($form->isSynchronized());
-        //$this->assertEquals($object, $form->getData());
+        $this->assertEquals($file, $form->getData());
 
         $view = $form->createView();
         $this->assertEquals('alt', $view->vars['image_alt']);
@@ -87,7 +87,7 @@ class ImageFormTypeTest extends TypeTestCase
         $form->setData($file);
 
         $this->assertTrue($form->isSynchronized());
-        //$this->assertEquals($object, $form->getData());
+        $this->assertEquals($file, $form->getData());
 
         $view = $form->createView();
         $this->assertEquals('http://example.com/ImageTypeTest.php', $view->vars['image_uri']);

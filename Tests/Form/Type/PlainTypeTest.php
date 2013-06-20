@@ -16,7 +16,7 @@ class PlainTypeTest extends TypeTestCase
         $form->setData($data);
 
         $this->assertTrue($form->isSynchronized());
-        //$this->assertEquals($object, $form->getData());
+        $this->assertEquals($data, $form->getData());
 
         $view = $form->createView();
         $this->assertEquals(true, $view->vars['read_only']);
