@@ -33,11 +33,14 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultOptions()
     {
-        /*$this->assertEquals(array(
+        $options = new \Symfony\Component\OptionsResolver\OptionsResolver();
+        $this->type->setDefaultOptions($options);
+
+        $this->assertEquals(array(
             'property_path' => false,
             'required' => true,
             'widget_options' => array(),
-        ), $this->type->getDefaultOptions(array()));*/
+        ), $options->resolve());
     }
 
     public function testBuildForm()
