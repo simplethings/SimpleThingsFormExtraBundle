@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\HttpFoundation\File\File;
 use SimpleThings\FormExtraBundle\Form\DataTransformer\FileSetTransformer;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Extends the File type not to handle a single file, but allowing to incrementally add one more file to a set.
@@ -22,9 +23,7 @@ class FileSetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->prependNormTransformer(new FileSetTransformer());
-        $builder->setAttribute('delete_route', $options['delete_route']);
-        $builder->setAttribute('delete_id', $options['delete_id']);
+        $builder->addModelTransformer(new FileSetTransformer());
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
@@ -50,17 +49,17 @@ class FileSetType extends AbstractType
                 throw new UnexpectedTypeException($file, 'string');
             }
         }
-        $view->set('files', $files);
-        $view->set('delete_route', $form->getAttribute('delete_route'));
-        $view->set('delete_id', $form->getAttribute('delete_id'));
+        $view->vars['files'] = $files;
+        $view->vars['delete_route'] = $options['delete_route'];
+        $view->vars['delete_id'] = $options['delete_id'];
     }
 
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'delete_route' => false,
             'delete_id' => false,
-        );
+        ));
     }
 
     public function getName()

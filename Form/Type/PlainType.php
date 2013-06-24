@@ -3,6 +3,7 @@
 namespace SimpleThings\FormExtraBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 /**
@@ -14,22 +15,16 @@ use Symfony\Component\Form\AbstractType;
  */
 class PlainType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return 'field';
-    }
 
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
-            'read_only' => true
-        );
+        $resolver->setDefaults(array(
+            'read_only' => true,
+            'compound' => false,
+        ));
     }
 
     /**

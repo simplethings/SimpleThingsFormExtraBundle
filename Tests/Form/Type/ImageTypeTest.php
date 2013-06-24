@@ -2,20 +2,24 @@
 
 namespace SimpleThings\FormExtraBundle\Tests\Form\Type;
 
+use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\File\File;
 use SimpleThings\FormExtraBundle\Form\Type\ImageType;
 
-class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
+class ImageFormTypeTest extends TypeTestCase
 {
+    /**
+     * @var ImageType
+     */
+    protected $type;
+
     public function setUp()
     {
         $this->type = new ImageType();
-        $this->dispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
-        $this->factory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
-        $this->builder = new FormBuilder('name', 'Symfony\Component\HttpFoundation\File\File', $this->dispatcher, $this->factory);
+        parent::setUp();
     }
 
     public function testNameAndParent()
@@ -26,57 +30,66 @@ class ImageFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultOptions()
     {
-        $this->assertEquals(array(
-            'base_path'                 => false,
-            'base_uri'                  => false,
-            'no_image_placeholder_uri'  => '',
-            'image_alt'                 => '',
-            'image_width'               => false,
-            'image_height'              => false,
-            'type'                      => 'file',
-        ), $this->type->getDefaultOptions(array()));
+        $file = new File(__FILE__);
+
+        $form = $this->factory->create($this->type, null, array(
+                'base_path' => 'base/path',
+                'base_uri' => 'path',
+            ));
+
+        $form->setData($file);
+
+        $this->assertTrue($form->isSynchronized());
+        $this->assertEquals($file, $form->getData());
+
+        $view = $form->createView();
+        $this->assertEquals('', $view->vars['image_alt']);
+        $this->assertEquals(false, $view->vars['image_width']);
+        $this->assertEquals(false, $view->vars['image_height']);
+        $this->assertEquals('file', $view->vars['type']);
     }
 
     public function testBuildForm()
     {
-        $options = array(
-            'base_path'                 => '/tmp',
-            'base_uri'                  => 'http://example.com',
-            'no_image_placeholder_uri'  => '',
-            'image_alt'                 => '',
-            'image_width'               => false,
-            'image_height'              => false,
-        );
+        $file = new File(__FILE__);
+        $form = $this->factory->create($this->type, null, array(
+                'base_path' => __DIR__,
+                'base_uri' => basename(__DIR__),
+                'image_alt'                 => 'alt',
+                'image_width'               => 10,
+                'image_height'              => 10,
+            ));
 
-        $this->type->buildForm($this->builder, $options);
+        $form->setData($file);
 
-        $this->assertTrue($this->builder->hasAttribute('base_path'));
-        $this->assertTrue($this->builder->hasAttribute('base_uri'));
-        $this->assertTrue($this->builder->hasAttribute('no_image_placeholder_uri'));
-        $this->assertTrue($this->builder->hasAttribute('image_alt'));
-        $this->assertTrue($this->builder->hasAttribute('image_width'));
-        $this->assertTrue($this->builder->hasAttribute('image_height'));
+        $this->assertTrue($form->isSynchronized());
+        $this->assertEquals($file, $form->getData());
+
+        $view = $form->createView();
+        $this->assertEquals('alt', $view->vars['image_alt']);
+        $this->assertEquals(10, $view->vars['image_width']);
+        $this->assertEquals(10, $view->vars['image_height']);
+        $this->assertEquals(basename($file->getPath()).'/'.$file->getFilename(), $view->vars['image_uri']);
     }
 
     public function testBuildView()
     {
-        $view = new FormView();
-
-        $options = array(
+        $file = new File(__FILE__);
+        $form = $this->factory->create($this->type, null, array(
             'base_path'                 => __DIR__,
             'base_uri'                  => 'http://example.com',
             'no_image_placeholder_uri'  => 'empty.jpg',
             'image_alt'                 => '',
             'image_width'               => false,
             'image_height'              => false,
-        );
+        ));
 
-        $this->type->buildForm($this->builder, $options);
+        $form->setData($file);
 
-        $form = $this->builder->getForm();
-        $form->setData(new File(__FILE__));
-        $this->type->buildView($view, $form, array());
+        $this->assertTrue($form->isSynchronized());
+        $this->assertEquals($file, $form->getData());
 
+        $view = $form->createView();
         $this->assertEquals('http://example.com/ImageTypeTest.php', $view->vars['image_uri']);
     }
 }
