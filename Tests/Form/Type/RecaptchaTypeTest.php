@@ -33,11 +33,14 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultOptions()
     {
+        $options = new \Symfony\Component\OptionsResolver\OptionsResolver();
+        $this->type->setDefaultOptions($options);
+
         $this->assertEquals(array(
             'property_path' => false,
             'required' => true,
             'widget_options' => array(),
-        ), $this->type->getDefaultOptions(array()));
+        ), $options->resolve());
     }
 
     public function testBuildForm()
@@ -48,14 +51,10 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
             ),
         ));
 
-        $this->assertEquals(array(
-            'theme' => 'white',
-        ), $this->builder->getAttribute('widget_options'));
-
         $this->assertTrue($this->builder->has('recaptcha_challenge_field'));
         $this->assertTrue($this->builder->has('recaptcha_response_field'));
         
-        $transformers = $this->builder->getClientTransformers();
+        $transformers = $this->builder->getViewTransformers();
         $this->assertEquals(1, count($transformers));
         $this->assertInstanceOf('SimpleThings\FormExtraBundle\Form\DataTransformer\RecaptchaTransformer', $transformers[0]);
     }
@@ -68,7 +67,11 @@ class RecaptchaFormTypeTest extends \PHPUnit_Framework_TestCase
             'theme' => 'white',
         ));
 
-        $this->type->buildView($view, $this->builder->getForm(), array());
+        $this->type->buildView($view, $this->builder->getForm(), array(
+                'widget_options' => array(
+                    'theme' => 'white'
+                ),
+            ));
 
         $this->assertEquals('publicKey', $view->vars['public_key']);
         $this->assertEquals(array(
