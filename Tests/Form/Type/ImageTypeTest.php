@@ -18,7 +18,7 @@ class ImageFormTypeTest extends TypeTestCase
 
     public function setUp()
     {
-        $this->type = new ImageType();
+        $this->type = new ImageType('base');
         parent::setUp();
     }
 

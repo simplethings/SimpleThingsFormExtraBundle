@@ -16,6 +16,7 @@
         </service>
 
         <service id="simple_things_form_extra.form.type.image" class="%simple_things_form_extra.form.type.image.class%">
+            <argument type="string">%kernel.root_dir%</argument>
             <tag name="form.type" alias="formextra_image" />
         </service>
 
