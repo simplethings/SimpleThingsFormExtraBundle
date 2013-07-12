@@ -25,9 +25,9 @@ class ImageType extends AbstractType
     /** @var string */
     private $webDir;
 
-    public function __construct($kernelDir)
+    public function __construct($webDir)
     {
-        $this->webDir = realpath($kernelDir . '/../web');
+        $this->webDir = realpath($webDir);
     }
 
     /**
