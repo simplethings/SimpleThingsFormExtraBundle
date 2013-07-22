@@ -8,6 +8,7 @@
         <parameter key="simple_things_form_extra.form.type.image.class">SimpleThings\FormExtraBundle\Form\Type\ImageType</parameter>
         <parameter key="simple_things_form_extra.form.type.plain.class">SimpleThings\FormExtraBundle\Form\Type\PlainType</parameter>
         <parameter key="simple_things_form_extra.form.type.file_set.class">SimpleThings\FormExtraBundle\Form\Type\FileSetType</parameter>
+        <parameter key="simple_things_form_extra.web_dir">%kernel.root_dir%/../web</parameter>
     </parameters>
 
     <services>
@@ -16,6 +17,7 @@
         </service>
 
         <service id="simple_things_form_extra.form.type.image" class="%simple_things_form_extra.form.type.image.class%">
+            <argument type="string">%simple_things_form_extra.web_dir%</argument>
             <tag name="form.type" alias="formextra_image" />
         </service>
 

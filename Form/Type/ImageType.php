@@ -22,6 +22,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ImageType extends AbstractType
 {
+    /** @var string */
+    private $webDir;
+
+    public function __construct($webDir)
+    {
+        $this->webDir = realpath($webDir);
+    }
+
     /**
      * Configures the Type
      *
@@ -30,9 +38,6 @@ class ImageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (!isset($options['base_path']) || !$options['base_path']) {
-            throw new \InvalidArgumentException("Base Path has to be configured.");
-        }
         if (!isset($options['base_uri']) || !$options['base_uri']) {
             throw new \InvalidArgumentException("Base Uri has to be configured.");
         }
@@ -46,6 +51,9 @@ class ImageType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
+        if (!isset($options['base_path']) || !$options['base_path']) {
+            $options['base_path'] = $this->webDir . $options['base_uri'];
+        }
         $data = $form->getData();
 
         if ($data && (strpos(realpath($data->getPath()), realpath($options['base_path'])) === 0)) {
