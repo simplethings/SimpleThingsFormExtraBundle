@@ -56,9 +56,13 @@ class ImageType extends AbstractType
         }
         $data = $form->getData();
 
-        if ($data && (strpos(realpath($data->getPath()), realpath($options['base_path'])) === 0)) {
+        if ($data) {
             /* @var $data SplFileInfo */
-            $uri = str_replace(realpath($options['base_path']), $options['base_uri'], $data->getRealPath());
+            if (strpos(realpath($data->getPath()), realpath($options['base_path'])) === 0) {
+                $uri = str_replace(realpath($options['base_path']), $options['base_uri'], $data->getRealPath());
+            } else {
+                $uri = str_replace($options['base_path'], $options['base_uri'], $data->getPathname());
+            }
             if ('/' !== DIRECTORY_SEPARATOR) {
                 $uri = str_replace(DIRECTORY_SEPARATOR, '/', $uri);
             }
