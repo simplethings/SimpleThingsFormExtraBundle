@@ -10,7 +10,7 @@
 
     <services>
         <service id="simple_things_form_extra.form.extension.help" class="%simple_things_form_extra.form.extension.help.class%">
-            <tag name="form.type_extension" alias="field" />
+            <tag name="form.type_extension" alias="form" />
         </service>
 
     </services>
