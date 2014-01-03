@@ -97,7 +97,7 @@ class RecaptchaType extends AbstractType
     {
         $resolver->setDefaults(array(
             'required'        => true,
-            'property_path'   => false,
+            'mapped'          => false,
             'widget_options'  => array(),
         ));
     }
