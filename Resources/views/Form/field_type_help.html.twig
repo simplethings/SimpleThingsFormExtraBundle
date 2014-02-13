@@ -6,7 +6,7 @@
     {% endif %}
 {% endblock %}
 
-{% block field_row %}
+{% block form_row %}
 {% spaceless %}
     <div>
         {{ form_label(form, label|default(null)) }}
@@ -15,4 +15,4 @@
         {{ block('field_help') }}
     </div>
 {% endspaceless %}
-{% endblock field_row %}
+{% endblock form_row %}
