@@ -1,7 +1,7 @@
 {# Widgets #}
 
 {% block field_help %}
-    {% if help is defined %}
+    {% if help|default %}
         <span class="help">{{ help }}</span>
     {% endif %}
 {% endblock %}
