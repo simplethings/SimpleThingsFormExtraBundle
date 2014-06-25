@@ -89,6 +89,18 @@ class SimpleThingsFormExtraExtensionTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testLoadClientValidation()
+    {
+        $container = new ContainerBuilder();
+        $extension = new SimpleThingsFormExtraExtension();
+        $extension->load(array(array(
+            'client_validation' => array('objects' => array('stdClass')),
+        )), $container);
+
+        $this->assertTrue($container->hasDefinition('simple_things_form_extra.form.extension.validation'));
+        $this->assertEquals(array('stdClass'), $container->getParameter('simple_things_form_extra.client_validation.objects'));
+    }
+
     public function testLoadAllowsEmptyConfig()
     {
         $container = new ContainerBuilder();

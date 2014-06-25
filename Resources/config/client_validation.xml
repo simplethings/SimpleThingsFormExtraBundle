@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="simple_things_form_extra.js_validation_constraints_generator.class">SimpleThings\FormExtraBundle\Service\JsValidationConstraintsGenerator</parameter>
+        <parameter key="simple_things_form_extra.form.extension.validation.class">SimpleThings\FormExtraBundle\Form\Extension\ValidationTypeExtension</parameter>
+        <parameter key="simple_things_form_extra.form.extension.error_attr.class">SimpleThings\FormExtraBundle\Form\Extension\ErrorAttrTypeExtension</parameter>
+        <parameter key="simple_things_form_extra.twig.extension.validation.class">SimpleThings\FormExtraBundle\Extension\ValidationExtension</parameter>
+        <parameter key="simple_things_form_extra.client_validation.objects" type="collection" />
+    </parameters>
+
+    <services>
+        <service id="simple_things_form_extra.form.extension.validation" class="%simple_things_form_extra.form.extension.validation.class%">
+            <tag name="form.type_extension" alias="form" />
+            <argument>%simple_things_form_extra.client_validation.objects%</argument>
+        </service>
+
+        <service id="simple_things_form_extra.form.extension.error_attr" class="%simple_things_form_extra.form.extension.error_attr.class%">
+            <tag name="form.type_extension" alias="field" />
+            <argument type="service" id="translator" />
+        </service>
+
+        <service id="simple_things_form_extra.twig.extension.validation" class="%simple_things_form_extra.twig.extension.validation.class%">
+            <tag name="twig.extension" alias="form" />
+            <argument type="service" id="simple_things_form_extra.js_validation_constraints_generator" />
+            <argument>%simple_things_form_extra.client_validation.objects%</argument>
+        </service>
+
+        <service id="simple_things_form_extra.js_validation_constraints_generator" class="%simple_things_form_extra.js_validation_constraints_generator.class%">
+            <argument type="service" id="validator.mapping.class_metadata_factory" />
+            <argument type="service" id="translator" on-invalid="null" />
+            <argument>%kernel.default_locale%</argument>
+        </service>
+    </services>
+</container>
