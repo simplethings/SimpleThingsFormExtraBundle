@@ -233,10 +233,10 @@ twig:
             - SimpleThingsFormExtraBundle:Form:field_type_help.html.twig
 ```
 
-You can also load the help extension form theme into your own form theme.
+Next, load the help extension form theme into your template.
 
 ```
-{% use 'SimpleThingsFormExtraBundle:Form:field_type_help.html.twig' %}
+{% form_theme form 'SimpleThingsFormExtraBundle:Form:field_type_help.html.twig' %}
 ```
 
 You can now provide the help message for field when building the form:
