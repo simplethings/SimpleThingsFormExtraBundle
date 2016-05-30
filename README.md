@@ -233,7 +233,7 @@ twig:
             - SimpleThingsFormExtraBundle:Form:field_type_help.html.twig
 ```
 
-You can also load the help extension form theme into your own form theme.
+Next, load the help extension form theme into your template.
 
 ```
 {% form_theme form 'SimpleThingsFormExtraBundle:Form:field_type_help.html.twig' %}
